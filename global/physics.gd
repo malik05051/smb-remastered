@@ -4,9 +4,6 @@ const GRAVITY = 1300.0
 const MAX_FALL_SPEED = 270.0
 const JUMP_SPEED = -240.0
 
-@onready var _level = $"../Main/Stage"
-
-
 const DEFAULT_TICKS_PER_SECOND = 60
 
 func _process(_delta):
@@ -15,13 +12,17 @@ func _process(_delta):
 
 
 func disable():
-	_toggle_children_physics(_level, false)
+	_toggle_children_physics(_get_level(), false)
 	get_node("/root/Logger").append("Physics disabled")
 
 
 func enable():
-	_toggle_children_physics(_level, true)
+	_toggle_children_physics(_get_level(), true)
 	get_node("/root/Logger").append("Physics enabled")
+
+
+func _get_level() -> Node:
+	return get_node("/root/Main/Stage")
 
 
 func _toggle_children_physics(node: Node, value: bool):

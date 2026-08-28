@@ -5,9 +5,6 @@ signal game_over
 
 const STARTING_LIVES = 3
 
-@onready var stage = $"/root/Main/Stage"
-@onready var tile_map: TileMap = $"/root/Main/Stage/TileMap"
-
 var lives: int = STARTING_LIVES
 
 enum StageTheme {
@@ -24,7 +21,7 @@ var theme: StageTheme = StageTheme.OVERWORLD:
 	set(value):
 		theme = value
 		var data = _THEMES[value] as ThemeData
-		tile_map.tile_set.get_source(0).texture = data.tile_set_texture
+		_get_tile_map().tile_set.get_source(0).texture = data.tile_set_texture
 		RenderingServer.set_default_clear_color(data.background_color)
 		theme_changed.emit(value)
 
@@ -36,3 +33,7 @@ func lose_life():
 		game_over.emit()
 	else:
 		get_tree().reload_current_scene()
+
+
+func _get_tile_map() -> TileMap:
+	return get_node("/root/Main/Stage/TileMap")
