@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://d1emq3qdnue2i"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://d1emq3qdnue2i"]
 
 [ext_resource type="Texture2D" uid="uid://cpwjveku4gyqg" path="res://assets/sprites/blocks.png" id="1_4muag"]
 [ext_resource type="Texture2D" uid="uid://swkwgu4mnlcq" path="res://assets/sprites/empty_block.png" id="2_uer5w"]
@@ -37,7 +37,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ov72j")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -45,7 +45,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j1nyq")
 }],
-"loop": true,
+"loop": 1,
 "name": &"empty",
 "speed": 5.0
 }]

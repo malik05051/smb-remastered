@@ -13,7 +13,7 @@ func _process(_delta):
 
 func disable():
 	_toggle_children_physics(_level, false)
-	Logger.append("Physics disabled")
+	get_node("/root/Logger").append("Physics disabled")
 
 
 func enable():

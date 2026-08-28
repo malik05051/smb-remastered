@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://ok6v2nj3besd"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ok6v2nj3besd"]
 
 [ext_resource type="Texture2D" uid="uid://cpwjveku4gyqg" path="res://assets/sprites/blocks.png" id="1_4llpe"]
 
@@ -36,7 +36,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cydyr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cickj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"empty",
 "speed": 5.0
 }]

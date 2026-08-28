@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://da1aee11kjfu7"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://da1aee11kjfu7"]
 
 [ext_resource type="Texture2D" uid="uid://411uurvuibyl" path="res://assets/sprites/goomba.png" id="1_d1i7n"]
 
@@ -20,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_teyql")
 }],
-"loop": true,
+"loop": 1,
 "name": &"stomp",
 "speed": 5.0
 }, {
@@ -31,7 +31,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ujukl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 7.5
 }]
