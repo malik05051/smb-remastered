@@ -18,7 +18,7 @@ func disable():
 
 func enable():
 	_toggle_children_physics(_level, true)
-	Logger.append("Physics enabled")
+	get_node("/root/Logger").append("Physics enabled")
 
 
 func _toggle_children_physics(node: Node, value: bool):
