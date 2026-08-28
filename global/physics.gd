@@ -7,8 +7,11 @@ const JUMP_SPEED = -240.0
 @onready var _level = $"../Main/Stage"
 
 
+const DEFAULT_TICKS_PER_SECOND = 60
+
 func _process(_delta):
-	Engine.physics_ticks_per_second = round(DisplayServer.screen_get_refresh_rate())
+	var refresh_rate = round(DisplayServer.screen_get_refresh_rate())
+	Engine.physics_ticks_per_second = int(refresh_rate) if refresh_rate > 0 else DEFAULT_TICKS_PER_SECOND
 
 
 func disable():

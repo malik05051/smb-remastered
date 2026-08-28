@@ -34,6 +34,10 @@ const STOMP_SPEED_CAP = -60.0
 
 const COOLDOWN_TIME_SEC = 3.0
 
+const DEATH_HOP_SPEED = -200.0
+const DEATH_GRAVITY = 700.0
+const DEATH_DELAY_SEC = 1.5
+
 # Nodes
 @onready var camera = get_node_or_null("Camera")
 
@@ -75,6 +79,7 @@ var state = State.SMALL:
 			Physics.disable()
 
 var has_cooldown = false
+var is_dead = false
 
 var collected_item_ref: Node = null
 
@@ -98,14 +103,22 @@ func _ready():
 	_update_tree()
 
 func _process(_delta):
+	if is_dead:
+		return
+
 	process_input()
 	process_animation()
 
 func _physics_process(delta):
+	if is_dead:
+		velocity.y += DEATH_GRAVITY * delta
+		position += velocity * delta
+		return
+
 	process_jump(delta)
 	process_walk(delta)
 	process_bounds_collision()
-	
+
 	_old_velocity = velocity
 
 	move_and_slide()
@@ -285,10 +298,23 @@ func transform(to_state: State):
 
 func take_hit():
 	if state == State.SMALL:
-		StageManager.lose_life()
+		die()
 	else:
 		transform(state - 1)
 		_cooldown()
+
+func die():
+	if is_dead:
+		return
+
+	is_dead = true
+	hitbox.set_deferred("monitoring", false)
+
+	velocity = Vector2(0.0, DEATH_HOP_SPEED)
+
+	sprite.play("death")
+
+	get_tree().create_timer(DEATH_DELAY_SEC).timeout.connect(StageManager.lose_life)
 
 func _cooldown():
 	has_cooldown = true

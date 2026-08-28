@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cbbuditkrn656"]
+[gd_scene load_steps=33 format=3 uid="uid://cbbuditkrn656"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_a1ce6"]
 [ext_resource type="Texture2D" uid="uid://cmwbahwwch8ro" path="res://assets/sprites/mario_small.png" id="2_gatvr"]
@@ -29,6 +29,10 @@ region = Rect2(36, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl8ov"]
 atlas = ExtResource("2_gatvr")
 region = Rect2(54, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_death1"]
+atlas = ExtResource("2_gatvr")
+region = Rect2(108, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hmvxf"]
 animations = [{
@@ -68,6 +72,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death1")
+}],
+"loop": false,
+"name": &"death",
 "speed": 5.0
 }]
 
