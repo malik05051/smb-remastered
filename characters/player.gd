@@ -285,8 +285,7 @@ func transform(to_state: State):
 
 func take_hit():
 	if state == State.SMALL:
-		# TODO: handle death
-		pass
+		StageManager.lose_life()
 	else:
 		transform(state - 1)
 		_cooldown()
