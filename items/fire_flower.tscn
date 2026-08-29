@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://items/fire_flower.gd" id="1_flower"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flower"]
+size = Vector2(14, 16)
+
+[node name="FireFlower" type="StaticBody2D" groups=["powerups"]]
+collision_layer = 4
+script = ExtResource("1_flower")
+
+[node name="Sprite" type="Node2D" parent="."]
+z_index = 5
+
+[node name="Leaves" type="Polygon2D" parent="Sprite"]
+color = Color(0.164706, 0.65098, 0.223529, 1)
+polygon = PackedVector2Array(-1, -3, -7, -5, -1, -6, 1, -3, 7, -5, 1, -6)
+
+[node name="Stem" type="Polygon2D" parent="Sprite"]
+color = Color(0.164706, 0.65098, 0.223529, 1)
+polygon = PackedVector2Array(-1, -3, 1, -3, 1, 0, -1, 0)
+
+[node name="Petals" type="Polygon2D" parent="Sprite"]
+color = Color(0.898039, 0.223529, 0.0745098, 1)
+polygon = PackedVector2Array(5, -11, 3.54, -7.46, 0, -6, -3.54, -7.46, -5, -11, -3.54, -14.54, 0, -16, 3.54, -14.54)
+
+[node name="Center" type="Polygon2D" parent="Sprite"]
+color = Color(1, 0.968627, 0.878431, 1)
+polygon = PackedVector2Array(2.5, -11, 1.25, -8.83, -1.25, -8.83, -2.5, -11, -1.25, -13.17, 1.25, -13.17)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_flower")

@@ -16,6 +16,7 @@ const MULTI_COIN_HITS = 10
 
 const coin_particle_scene = preload("res://particles/coin_particle.tscn")
 const red_mushroom_scene = preload("res://items/red_mushroom.tscn")
+const fire_flower_scene = preload("res://items/fire_flower.tscn")
 
 @export var item: Item = Item.NONE
 
@@ -74,7 +75,10 @@ func on_hit(body: Node):
 			if _multi_coin_hits >= MULTI_COIN_HITS:
 				item = Item.NONE
 		Item.RED_MUSHROOM_OR_FIRE_FLOWER:
-			_item_instance = red_mushroom_scene.instantiate()  # TODO: fire flower
+			if body is Player and body.state != Player.State.SMALL:
+				_item_instance = fire_flower_scene.instantiate()
+			else:
+				_item_instance = red_mushroom_scene.instantiate()
 			item = Item.NONE
 		Item.GREEN_MUSHROOM:
 			_item_instance = red_mushroom_scene.instantiate()  # TODO: green (1-up) mushroom

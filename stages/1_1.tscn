@@ -140,11 +140,11 @@ item = 3
 
 [node name="QuestionBlock7" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1512, 88)
-item = 0
+item = 1
 
 [node name="QuestionBlock8" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1704, 152)
-item = 0
+item = 1
 
 [node name="QuestionBlock9" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1752, 88)
@@ -152,23 +152,23 @@ item = 3
 
 [node name="QuestionBlock10" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1752, 152)
-item = 0
+item = 1
 
 [node name="QuestionBlock11" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1800, 152)
-item = 0
+item = 1
 
 [node name="QuestionBlock12" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(2071, 88)
-item = 0
+item = 1
 
 [node name="QuestionBlock13" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(2087, 88)
-item = 0
+item = 1
 
 [node name="QuestionBlock14" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(2728, 152)
-item = 0
+item = 1
 
 [node name="Goomba" parent="." instance=ExtResource("4_38siv")]
 position = Vector2(360, 200)

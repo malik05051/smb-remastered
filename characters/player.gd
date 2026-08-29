@@ -70,7 +70,7 @@ var state = State.SMALL:
 			match state:
 				State.SMALL:
 					transition_sprite.animation = "shrink"
-				State.BIG:
+				State.BIG, State.FIRE:
 					transition_sprite.animation = "grow"
 			
 			transition_sprite.flip_h = sprite.flip_h
@@ -388,6 +388,8 @@ func _on_hitbox_body_entered(body: Node):
 		
 		if body is RedMushroom:
 			transform(State.BIG)
+		elif body is FireFlower:
+			transform(State.BIG if state == State.SMALL else State.FIRE)
 
 func _on_animation_player_animation_finished(_anim_name):
 	Physics.enable()
