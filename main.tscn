@@ -8,3 +8,4 @@
 [node name="HUD" parent="." unique_id=984922526 instance=ExtResource("2_jn731")]
 
 [node name="Stage" parent="." unique_id=922917817 instance=ExtResource("2_54f2a")]
+position = Vector2(20, 4)
