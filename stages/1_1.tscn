@@ -219,7 +219,7 @@ position = Vector2(2792, 200)
 position = Vector2(2816, 200)
 
 [node name="Flag" parent="." instance=ExtResource("9_flag")]
-position = Vector2(180, 200)
+position = Vector2(260, 3215)
 
 [node name="Player" parent="." instance=ExtResource("8_tkm5h")]
 position = Vector2(48, 200)
