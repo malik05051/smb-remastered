@@ -81,6 +81,7 @@ var state = State.SMALL:
 var has_cooldown = false
 var is_dead = false
 var is_finishing = false
+var _has_landed = false
 
 var collected_item_ref: Node = null
 
@@ -116,7 +117,10 @@ func _physics_process(delta):
 		position += velocity * delta
 		return
 
-	if camera and global_position.y > camera.limit_bottom:
+	if is_on_floor():
+		_has_landed = true
+
+	if _has_landed and camera and global_position.y > camera.limit_bottom:
 		die()
 		return
 
