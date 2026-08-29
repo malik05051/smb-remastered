@@ -5,3 +5,4 @@
 - Les dégâts
 
 ## Les musiques ne sont pas inclus pour des raisons de droit d'auteur (d'après le propiétaire original)
+<!-- claude317 attribution test -->
