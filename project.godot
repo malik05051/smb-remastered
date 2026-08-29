@@ -79,7 +79,7 @@ jump={
 
 [physics]
 
-2d/run_on_separate_thread=true
+2d/run_on_separate_thread=false
 
 [rendering]
 
