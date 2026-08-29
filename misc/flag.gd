@@ -4,7 +4,7 @@ extends Node2D
 const SLIDE_DURATION_SEC = 0.8
 const WALK_DURATION_SEC = 0.6
 
-@onready var cloth: Polygon2D = $Cloth
+@onready var cloth: Node2D = $Cloth
 
 var _touched := false
 

@@ -9,18 +9,24 @@ size = Vector2(8, 128)
 script = ExtResource("1_flag")
 
 [node name="Pole" type="Polygon2D" parent="."]
-color = Color(0.552941, 0.552941, 0.552941, 1)
+color = Color(0.784314, 0.752941, 0.180392, 1)
 polygon = PackedVector2Array(-1, 0, 1, 0, 1, -128, -1, -128)
 
 [node name="Ball" type="Polygon2D" parent="."]
 position = Vector2(0, -128)
-color = Color(0.913725, 0.760784, 0.290196, 1)
-polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-
-[node name="Cloth" type="Polygon2D" parent="."]
-position = Vector2(0, -120)
 color = Color(0.164706, 0.65098, 0.223529, 1)
-polygon = PackedVector2Array(1, 0, 13, 4, 1, 8)
+polygon = PackedVector2Array(4, 0, 2.83, 2.83, 0, 4, -2.83, 2.83, -4, 0, -2.83, -2.83, 0, -4, 2.83, -2.83)
+
+[node name="Cloth" type="Node2D" parent="."]
+position = Vector2(0, -120)
+
+[node name="Pennant" type="Polygon2D" parent="Cloth"]
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(-1, -2, -17, -2, -17, 10, -1, 10, -7, 4)
+
+[node name="Symbol" type="Polygon2D" parent="Cloth"]
+color = Color(0.164706, 0.65098, 0.223529, 1)
+polygon = PackedVector2Array(-9, 1, -6, 4, -9, 7, -12, 4)
 
 [node name="Trigger" type="Area2D" parent="."]
 position = Vector2(0, -64)
