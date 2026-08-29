@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byfj8qhvpjcw"]
+[gd_scene load_steps=10 format=3 uid="uid://byfj8qhvpjcw"]
 
 [ext_resource type="TileSet" uid="uid://cecbimox7mcnv" path="res://assets/tilesets/tileset.tres" id="1_6vmxt"]
 [ext_resource type="PackedScene" uid="uid://df00q74jhgta4" path="res://blocks/question_block.tscn" id="1_o10pm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7j5q4vy0tr03" path="res://misc/zone.tscn" id="5_2itge"]
 [ext_resource type="PackedScene" uid="uid://c30a23epjbrps" path="res://blocks/brick_block.tscn" id="7_0l3fy"]
 [ext_resource type="PackedScene" uid="uid://cbbuditkrn656" path="res://characters/player.tscn" id="8_tkm5h"]
+[ext_resource type="PackedScene" path="res://misc/flag.tscn" id="9_flag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qraqc"]
 size = Vector2(3584, 240)
@@ -216,6 +217,9 @@ position = Vector2(2792, 200)
 
 [node name="Goomba16" parent="." instance=ExtResource("4_38siv")]
 position = Vector2(2816, 200)
+
+[node name="Flag" parent="." instance=ExtResource("9_flag")]
+position = Vector2(3360, 200)
 
 [node name="Player" parent="." instance=ExtResource("8_tkm5h")]
 position = Vector2(48, 200)
