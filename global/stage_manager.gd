@@ -3,10 +3,12 @@ extends Node
 signal theme_changed
 signal game_over
 signal level_completed
+signal coin_collected
 
 const STARTING_LIVES = 3
 
 var lives: int = STARTING_LIVES
+var coins: int = 0
 
 enum StageTheme {
 	OVERWORLD,
@@ -38,6 +40,11 @@ func lose_life():
 
 func level_complete():
 	level_completed.emit()
+
+
+func collect_coin():
+	coins += 1
+	coin_collected.emit()
 
 
 func _get_tile_map() -> TileMap:

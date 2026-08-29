@@ -12,6 +12,7 @@ const _THEMES = {
 }
 
 const ON_HIT_VELOCITY = -140
+const MULTI_COIN_HITS = 10
 
 const coin_particle_scene = preload("res://particles/coin_particle.tscn")
 const red_mushroom_scene = preload("res://items/red_mushroom.tscn")
@@ -25,6 +26,7 @@ var _hit: bool = false
 var _is_empty: bool = false
 var _velocity: float = 0
 var _item_instance: Node = null
+var _multi_coin_hits: int = 0
 
 
 func _ready():
@@ -62,19 +64,29 @@ func on_hit(body: Node):
 	match item:
 		Item.SINGLE_COIN:
 			_item_instance = coin_particle_scene.instantiate()
+			StageManager.collect_coin()
+			item = Item.NONE
+		Item.MULTI_COIN:
+			_item_instance = coin_particle_scene.instantiate()
+			StageManager.collect_coin()
+
+			_multi_coin_hits += 1
+			if _multi_coin_hits >= MULTI_COIN_HITS:
+				item = Item.NONE
 		Item.RED_MUSHROOM_OR_FIRE_FLOWER:
-			if body is Player and body.state != Player.State.SMALL:
-				_item_instance = red_mushroom_scene.instantiate()  # TODO: fire flower
-			else:
-				_item_instance = red_mushroom_scene.instantiate()
+			_item_instance = red_mushroom_scene.instantiate()  # TODO: fire flower
+			item = Item.NONE
+		Item.GREEN_MUSHROOM:
+			_item_instance = red_mushroom_scene.instantiate()  # TODO: green (1-up) mushroom
+			item = Item.NONE
 		_:
 			_item_instance = null
 
-	if _item_instance:
-		item = Item.NONE
+	if _item_instance and item == Item.NONE:
 		_is_empty = true
 		sprite.play("empty")
 
+	if _item_instance:
 		_item_instance.position = position + Vector2.UP * 16
 		if "spawner" in _item_instance:
 			_item_instance.spawner = self

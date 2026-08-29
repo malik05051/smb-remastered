@@ -36,7 +36,7 @@ const COOLDOWN_TIME_SEC = 3.0
 
 const DEATH_HOP_SPEED = -200.0
 const DEATH_GRAVITY = 700.0
-const DEATH_DELAY_SEC = 1.5
+const DEATH_DELAY_SEC = 2.5
 
 # Nodes
 @onready var camera = get_node_or_null("Camera")
@@ -114,6 +114,10 @@ func _physics_process(delta):
 	if is_dead:
 		velocity.y += DEATH_GRAVITY * delta
 		position += velocity * delta
+		return
+
+	if camera and global_position.y > camera.limit_bottom:
+		die()
 		return
 
 	process_jump(delta)

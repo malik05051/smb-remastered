@@ -5,14 +5,17 @@ const STARTING_TIME: int = 300
 @onready var _timer_label: Label = $Control/HBoxContainer/Timer
 @onready var _countdown: Timer = $Countdown
 @onready var _message_label: Label = $Control/Message
+@onready var _coins_label: Label = $Control/HBoxContainer/Coins
 
 var time_left: int = STARTING_TIME
 
 
 func _ready():
 	_update_label()
+	_update_coins_label()
 	_countdown.timeout.connect(_on_countdown_timeout)
 	StageManager.level_completed.connect(_on_level_completed)
+	StageManager.coin_collected.connect(_update_coins_label)
 
 
 func _on_countdown_timeout():
@@ -30,3 +33,7 @@ func _on_level_completed():
 
 func _update_label():
 	_timer_label.text = "Time\n%4d" % time_left
+
+
+func _update_coins_label():
+	_coins_label.text = "\n  ×%02d" % StageManager.coins
