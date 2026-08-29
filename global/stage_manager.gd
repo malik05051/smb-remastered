@@ -2,6 +2,7 @@ extends Node
 
 signal theme_changed
 signal game_over
+signal level_completed
 
 const STARTING_LIVES = 3
 
@@ -33,6 +34,10 @@ func lose_life():
 		game_over.emit()
 	else:
 		get_tree().reload_current_scene()
+
+
+func level_complete():
+	level_completed.emit()
 
 
 func _get_tile_map() -> TileMap:

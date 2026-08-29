@@ -80,6 +80,7 @@ var state = State.SMALL:
 
 var has_cooldown = false
 var is_dead = false
+var is_finishing = false
 
 var collected_item_ref: Node = null
 
@@ -103,7 +104,7 @@ func _ready():
 	_update_tree()
 
 func _process(_delta):
-	if is_dead:
+	if is_dead or is_finishing:
 		return
 
 	process_input()
@@ -315,6 +316,23 @@ func die():
 	sprite.play("death")
 
 	get_tree().create_timer(DEATH_DELAY_SEC).timeout.connect(StageManager.lose_life)
+
+func finish_level(pole_x: float, ground_y: float, slide_duration: float, walk_duration: float):
+	if is_dead or is_finishing:
+		return
+
+	is_finishing = true
+	hitbox.set_deferred("monitoring", false)
+	Physics.disable()
+
+	velocity = Vector2.ZERO
+	is_facing_left = false
+	sprite.play("idle")
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", Vector2(pole_x, ground_y), slide_duration)
+	tween.tween_property(self, "global_position:x", pole_x + 32.0, walk_duration)
+	tween.tween_callback(StageManager.level_complete)
 
 func _cooldown():
 	has_cooldown = true
