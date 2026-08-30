@@ -22,12 +22,18 @@ const REVIVE_SEC = 6.0
 # to stay "alive" for Mario to be able to kick it.
 var is_alive: bool = true
 
+# Set by the EnemyActivator child until Mario comes near.
+var is_dormant: bool = false
+
 var koopa_state: KoopaState = KoopaState.WALKING
 
 var _revive_timer := 0.0
 
 
 func _physics_process(delta):
+	if is_dormant:
+		return
+
 	var collision = get_last_slide_collision()
 
 	if collision:

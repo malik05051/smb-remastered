@@ -1,9 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://cbbuditkrn656"]
+[gd_scene load_steps=33 format=3 uid="uid://cbbuditkrn656"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_a1ce6"]
 [ext_resource type="Texture2D" uid="uid://cmwbahwwch8ro" path="res://assets/sprites/mario_small.png" id="2_gatvr"]
 [ext_resource type="Texture2D" uid="uid://bdu8qwbxsamiv" path="res://assets/sprites/mario_big.png" id="3_wo87p"]
-[ext_resource type="Texture2D" path="res://assets/sprites/mario_fire.png" id="9_fire"]
 [ext_resource type="Texture2D" uid="uid://culctsxgkirf" path="res://assets/sprites/mario_grow.png" id="4_f3wyq"]
 [ext_resource type="Texture2D" uid="uid://dk2kaoiuhbxjt" path="res://assets/sprites/mario_shrink.png" id="5_oyv1a"]
 
@@ -260,182 +259,6 @@ _data = {
 "transition": SubResource("Animation_6ungc")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3uj8x_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(17, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8cv1f_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(85, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cs81o_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(68, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d4ost_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(34, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqdj7_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(51, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mtda1_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(102, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xudw5_fire"]
-atlas = ExtResource("9_fire")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fire"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mtda1_fire")
-}],
-"loop": true,
-"name": &"crouch",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xudw5_fire")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8cv1f_fire")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cs81o_fire")
-}],
-"loop": true,
-"name": &"skid",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3uj8x_fire")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d4ost_fire")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqdj7_fire")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u0jpq"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayyvx"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(18, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3vnx"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(36, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6gjrp"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qed1p"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(18, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r80ut"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(36, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_41hy2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u0jpq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ayyvx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i3vnx")
-}],
-"loop": true,
-"name": &"grow",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6gjrp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qed1p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r80ut")
-}],
-"loop": true,
-"name": &"shrink",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t120l"]
-size = Vector2(10, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t48u"]
-size = Vector2(10, 27)
-
-[sub_resource type="Animation" id="Animation_6ungc"]
-resource_name = "transition"
-step = 0.066
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../TransitionSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.264, 0.33, 0.396, 0.462, 0.528, 0.594, 0.66, 0.726, 0.792),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1, 0, 1, 2, 0, 1, 2, 0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.132, 0.858),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"_on_transition_started"
-}, {
-"args": [],
-"method": &"_on_transition_finished"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjf8o"]
-_data = {
-"transition": SubResource("Animation_6ungc")
-}
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 floor_stop_on_slope = false
@@ -457,15 +280,6 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, -6.9)
 sprite_frames = SubResource("SpriteFrames_g84c2")
-animation = &"idle"
-
-[node name="FireSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-z_index = 5
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(0, -6.9)
-sprite_frames = SubResource("SpriteFrames_fire")
 animation = &"idle"
 
 [node name="TransitionSprite" type="AnimatedSprite2D" parent="."]
