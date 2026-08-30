@@ -10,6 +10,9 @@ const DESPAWN_TIME_SEC: float = 1.0
 
 var is_alive: bool = true
 
+# Set by the EnemyActivator child until Mario comes near.
+var is_dormant: bool = false
+
 const _THEMES = {
 	StageManager.StageTheme.OVERWORLD: preload("res://enemies/goomba_frames_overworld.tres"),
 	StageManager.StageTheme.UNDERGROUND: preload("res://enemies/goomba_frames_underground.tres"),
@@ -22,6 +25,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if is_dormant:
+		return
+
 	var collision = get_last_slide_collision()
 
 	if collision:

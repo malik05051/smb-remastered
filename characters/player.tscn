@@ -259,7 +259,7 @@ _data = {
 "transition": SubResource("Animation_6ungc")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 floor_stop_on_slope = false
 floor_max_angle = 0.174533

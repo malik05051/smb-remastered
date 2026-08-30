@@ -14,7 +14,7 @@ const SHELL_SPEED = 160.0
 const REVIVE_SEC = 6.0
 
 @onready var visual: Node2D = $Visual
-@onready var walk_visual: Node2D = $Visual/Walking
+@onready var sprite: AnimatedSprite2D = $Visual/Sprite
 
 @export var is_facing_left: bool = true
 
@@ -22,12 +22,18 @@ const REVIVE_SEC = 6.0
 # to stay "alive" for Mario to be able to kick it.
 var is_alive: bool = true
 
+# Set by the EnemyActivator child until Mario comes near.
+var is_dormant: bool = false
+
 var koopa_state: KoopaState = KoopaState.WALKING
 
 var _revive_timer := 0.0
 
 
 func _physics_process(delta):
+	if is_dormant:
+		return
+
 	var collision = get_last_slide_collision()
 
 	if collision:
@@ -78,12 +84,12 @@ func kick(direction: float):
 func _enter_shell():
 	koopa_state = KoopaState.SHELL
 	_revive_timer = REVIVE_SEC
-	walk_visual.visible = false
+	sprite.play("shell")
 
 
 func _wake_up():
 	koopa_state = KoopaState.WALKING
-	walk_visual.visible = true
+	sprite.play("walk")
 
 
 func _on_hitbox_area_entered(area: Area2D):

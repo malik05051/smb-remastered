@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyedtrdyumqly"]
+[gd_scene load_steps=5 format=3 uid="uid://dyedtrdyumqly"]
 
 [ext_resource type="Script" path="res://enemies/goomba.gd" id="1_kindd"]
+[ext_resource type="Script" path="res://enemies/enemy_activator.gd" id="9_act"]
 [ext_resource type="SpriteFrames" uid="uid://briwoepw726as" path="res://enemies/goomba_frames_overworld.tres" id="2_mtght"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j6xw"]
@@ -32,8 +33,7 @@ visible = false
 position = Vector2(0, 8)
 polygon = PackedVector2Array(-5, -12, -7, -10, -7, -2, -5, 0, 5, 0, 7, -2, 7, -10, 5, -12)
 
-[node name="VisibilityEnabler" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(0, 1)
-scale = Vector2(0.8, 0.8)
+[node name="Activator" type="Node" parent="."]
+script = ExtResource("9_act")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
