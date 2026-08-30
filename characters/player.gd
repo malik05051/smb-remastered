@@ -34,6 +34,10 @@ const STOMP_SPEED_CAP = -60.0
 
 const COOLDOWN_TIME_SEC = 3.0
 
+# Points for stomping enemies without touching the ground in between, as in the
+# original. Past the end of the list every further stomp awards an extra life.
+const STOMP_POINTS = [100, 200, 400, 500, 800, 1000, 2000, 4000, 5000, 8000]
+
 const DEATH_HOP_SPEED = -200.0
 const DEATH_GRAVITY = 700.0
 const DEATH_DELAY_SEC = 2.5
@@ -82,6 +86,7 @@ var has_cooldown = false
 var is_dead = false
 var is_finishing = false
 var _has_landed = false
+var _stomp_combo = 0
 
 var collected_item_ref: Node = null
 
@@ -119,6 +124,7 @@ func _physics_process(delta):
 
 	if is_on_floor():
 		_has_landed = true
+		_stomp_combo = 0
 
 	if _has_landed and camera and global_position.y > camera.limit_bottom:
 		die()
@@ -379,13 +385,24 @@ func _on_hitbox_area_entered(area: Area2D):
 			if body.has_method("stomp"):
 				body.stomp()
 				velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
+				_award_stomp_points()
 		elif not has_cooldown:
 			take_hit()
+
+func _award_stomp_points():
+	if _stomp_combo < STOMP_POINTS.size():
+		StageManager.add_score(STOMP_POINTS[_stomp_combo])
+	else:
+		StageManager.add_life()
+
+	_stomp_combo += 1
+
 
 func _on_hitbox_body_entered(body: Node):
 	if body.is_in_group("powerups"):
 		collected_item_ref = body
-		
+		StageManager.add_score(StageManager.POINTS_POWERUP)
+
 		if body is RedMushroom:
 			transform(State.BIG)
 		elif body is FireFlower:

@@ -4,11 +4,22 @@ signal theme_changed
 signal game_over
 signal level_completed
 signal coin_collected
+signal score_changed
 
 const STARTING_LIVES = 3
 
+# Point values from the NES original.
+const POINTS_COIN = 200
+const POINTS_POWERUP = 1000
+const POINTS_FIREBALL_KILL = 200
+# Time left is converted to points at the end of a stage.
+const POINTS_PER_TIME_UNIT = 50
+# Every 100 coins grants an extra life, as in the original.
+const COINS_PER_EXTRA_LIFE = 100
+
 var lives: int = STARTING_LIVES
 var coins: int = 0
+var score: int = 0
 
 enum StageTheme {
 	OVERWORLD,
@@ -42,8 +53,23 @@ func level_complete():
 	level_completed.emit()
 
 
+func add_score(amount: int):
+	score += amount
+	score_changed.emit()
+
+
+func add_life():
+	lives += 1
+
+
 func collect_coin():
 	coins += 1
+	add_score(POINTS_COIN)
+
+	if coins >= COINS_PER_EXTRA_LIFE:
+		coins -= COINS_PER_EXTRA_LIFE
+		add_life()
+
 	coin_collected.emit()
 
 
