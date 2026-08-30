@@ -32,6 +32,11 @@ const SPEED_THRESHOLDS = [60, 138.75]
 const STOMP_SPEED = 240.0
 const STOMP_SPEED_CAP = -60.0
 
+# The original allows at most two of Mario's fireballs on screen at a time.
+const MAX_FIREBALLS = 2
+
+const fireball_scene = preload("res://items/fireball.tscn")
+
 const COOLDOWN_TIME_SEC = 3.0
 
 # Points for stomping enemies without touching the ground in between, as in the
@@ -143,8 +148,12 @@ func process_input():
 	input_axis.x = Input.get_axis("move_left", "move_right")
 	input_axis.y = Input.get_axis("move_up", "move_down")
 
+	# The run button doubles as the fire button, as on the NES controller.
+	if state == State.FIRE and Input.is_action_just_pressed("run"):
+		_shoot_fireball()
+
 	var was_crouching = is_crouching
-	
+
 	if is_on_floor():
 		is_running = Input.is_action_pressed("run")
 		is_crouching = Input.is_action_pressed("move_down")
@@ -388,6 +397,15 @@ func _on_hitbox_area_entered(area: Area2D):
 				_award_stomp_points()
 		elif not has_cooldown:
 			take_hit()
+
+func _shoot_fireball():
+	if get_tree().get_nodes_in_group("fireballs").size() >= MAX_FIREBALLS:
+		return
+
+	var fireball = fireball_scene.instantiate()
+	add_sibling(fireball)
+	fireball.launch(global_position + Vector2(-8.0 if is_facing_left else 8.0, -4.0), is_facing_left)
+
 
 func _award_stomp_points():
 	if _stomp_combo < STOMP_POINTS.size():
