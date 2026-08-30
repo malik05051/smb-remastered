@@ -55,7 +55,7 @@ animations = [{
 script = ExtResource("4_hud_gd")
 
 [node name="Countdown" type="Timer" parent="."]
-wait_time = 1.0
+wait_time = 0.4
 autostart = true
 
 [node name="Control" type="Control" parent="."]
@@ -84,7 +84,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Mario
+text = "MARIO
 000000"
 
 [node name="Coins" type="Label" parent="Control/HBoxContainer"]
@@ -103,7 +103,7 @@ autoplay = "default"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "World
+text = "WORLD
 1-1"
 horizontal_alignment = 1
 
@@ -111,8 +111,8 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
-text = "Time
- 300"
+text = "TIME
+ 400"
 horizontal_alignment = 2
 
 [node name="Message" type="Label" parent="Control"]

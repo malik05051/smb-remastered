@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-const STARTING_TIME: int = 300
+# The NES original gives 400 time units in most stages (1-1 included), and one
+# unit lasts 0.4s (24 frames at 60Hz NTSC) rather than a real second.
+const STARTING_TIME: int = 400
 
 @onready var _timer_label: Label = $Control/HBoxContainer/Timer
 @onready var _countdown: Timer = $Countdown
@@ -32,7 +34,7 @@ func _on_level_completed():
 
 
 func _update_label():
-	_timer_label.text = "Time\n%4d" % time_left
+	_timer_label.text = "TIME\n%03d" % time_left
 
 
 func _update_coins_label():
