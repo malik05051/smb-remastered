@@ -45,8 +45,20 @@ func lose_life():
 
 	if lives <= 0:
 		game_over.emit()
+		# Nothing used to act on game_over, so running out of lives left the
+		# game sitting there with a dead Mario and no way to carry on.
+		_restart_game()
 	else:
 		get_tree().reload_current_scene()
+
+
+func _restart_game():
+	lives = STARTING_LIVES
+	coins = 0
+	score = 0
+	score_changed.emit()
+	coin_collected.emit()
+	get_tree().reload_current_scene()
 
 
 func level_complete():
