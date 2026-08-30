@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cbbuditkrn656"]
+[gd_scene load_steps=42 format=3 uid="uid://cbbuditkrn656"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_a1ce6"]
 [ext_resource type="Texture2D" uid="uid://cmwbahwwch8ro" path="res://assets/sprites/mario_small.png" id="2_gatvr"]
@@ -336,105 +336,6 @@ animations = [{
 "name": &"walk",
 "speed": 5.0
 }]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u0jpq"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayyvx"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(18, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3vnx"]
-atlas = ExtResource("4_f3wyq")
-region = Rect2(36, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6gjrp"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qed1p"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(18, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r80ut"]
-atlas = ExtResource("5_oyv1a")
-region = Rect2(36, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_41hy2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u0jpq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ayyvx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i3vnx")
-}],
-"loop": true,
-"name": &"grow",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6gjrp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qed1p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r80ut")
-}],
-"loop": true,
-"name": &"shrink",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t120l"]
-size = Vector2(10, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t48u"]
-size = Vector2(10, 27)
-
-[sub_resource type="Animation" id="Animation_6ungc"]
-resource_name = "transition"
-step = 0.066
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../TransitionSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.264, 0.33, 0.396, 0.462, 0.528, 0.594, 0.66, 0.726, 0.792),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1, 0, 1, 2, 0, 1, 2, 0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.132, 0.858),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"_on_transition_started"
-}, {
-"args": [],
-"method": &"_on_transition_finished"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjf8o"]
-_data = {
-"transition": SubResource("Animation_6ungc")
-}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
