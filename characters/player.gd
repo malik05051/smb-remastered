@@ -100,6 +100,7 @@ var collected_item_ref: Node = null
 
 @onready var small_sprite: AnimatedSprite2D = $SmallSprite
 @onready var big_sprite: AnimatedSprite2D = $BigSprite
+@onready var fire_sprite: AnimatedSprite2D = $FireSprite
 @onready var transition_sprite: AnimatedSprite2D = $TransitionSprite
 
 @onready var hitbox: Area2D = $Hitbox
@@ -148,8 +149,7 @@ func process_input():
 	input_axis.x = Input.get_axis("move_left", "move_right")
 	input_axis.y = Input.get_axis("move_up", "move_down")
 
-	# The run button doubles as the fire button, as on the NES controller.
-	if state == State.FIRE and Input.is_action_just_pressed("run"):
+	if state == State.FIRE and Input.is_action_just_pressed("fire"):
 		_shoot_fireball()
 
 	var was_crouching = is_crouching
@@ -305,10 +305,16 @@ func _update_tree():
 	var is_small = not state
 	var is_crouching_or_small = is_crouching or is_small
 
-	sprite = small_sprite if is_small else big_sprite
+	if is_small:
+		sprite = small_sprite
+	elif state == State.FIRE:
+		sprite = fire_sprite
+	else:
+		sprite = big_sprite
 
-	small_sprite.visible = is_small	
-	big_sprite.visible = not is_small
+	small_sprite.visible = is_small
+	big_sprite.visible = not is_small and state != State.FIRE
+	fire_sprite.visible = not is_small and state == State.FIRE
 
 	big_collision_shape.disabled = is_crouching_or_small
 	big_hitbox_shape.disabled = is_crouching_or_small
