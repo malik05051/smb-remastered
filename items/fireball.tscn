@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://items/fireball.gd" id="1_fball"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbody"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhit"]
+radius = 4.0
+
+[node name="Fireball" type="CharacterBody2D" groups=["fireballs"]]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_fball")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fbody")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Outer" type="Polygon2D" parent="Visual"]
+color = Color(0.94902, 0.4, 0.101961, 1)
+polygon = PackedVector2Array(4, 0, 2.83, 2.83, 0, 4, -2.83, 2.83, -4, 0, -2.83, -2.83, 0, -4, 2.83, -2.83)
+
+[node name="Inner" type="Polygon2D" parent="Visual"]
+color = Color(1, 0.898039, 0.4, 1)
+polygon = PackedVector2Array(2, 0, 1.41, 1.41, 0, 2, -1.41, 1.41, -2, 0, -1.41, -1.41, 0, -2, 1.41, -1.41)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_fhit")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
