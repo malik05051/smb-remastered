@@ -1,7 +1,7 @@
 class_name FireFlower
 extends StaticBody2D
 
-@onready var sprite: Node2D = $Sprite
+@onready var sprite: Sprite2D = $Sprite
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 
 var spawner: Node = null
@@ -21,10 +21,12 @@ func setup_block_animation():
 	var _z_index = sprite.z_index
 	sprite.z_index = -1
 	sprite.visible = true
-	sprite.position = Vector2.DOWN * 16
+	# Nudge the drawing, not the node, so the flower keeps its placement while
+	# it rises out of the block.
+	sprite.offset = Vector2.DOWN * 16
 
 	var tween = get_tree().create_tween()
-	tween.tween_property(sprite, "position", Vector2.ZERO, 1)
+	tween.tween_property(sprite, "offset", Vector2.ZERO, 1)
 
 	await tween.finished
 
