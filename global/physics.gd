@@ -8,7 +8,13 @@ const DEFAULT_TICKS_PER_SECOND = 60
 
 func _process(_delta):
 	var refresh_rate = round(DisplayServer.screen_get_refresh_rate())
-	Engine.physics_ticks_per_second = int(refresh_rate) if refresh_rate > 0 else DEFAULT_TICKS_PER_SECOND
+	var ticks = int(refresh_rate) if refresh_rate > 0 else DEFAULT_TICKS_PER_SECOND
+
+	# Only assign when it actually changes. Writing physics_ticks_per_second
+	# every single frame resets the physics step accumulator, which shows up as
+	# small recurring hitches.
+	if Engine.physics_ticks_per_second != ticks:
+		Engine.physics_ticks_per_second = ticks
 
 
 func disable():
