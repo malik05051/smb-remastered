@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://byfj8qhvpjcw"]
+[gd_scene load_steps=12 format=3 uid="uid://byfj8qhvpjcw"]
 
 [ext_resource type="TileSet" uid="uid://cecbimox7mcnv" path="res://assets/tilesets/tileset.tres" id="1_6vmxt"]
 [ext_resource type="PackedScene" uid="uid://df00q74jhgta4" path="res://blocks/question_block.tscn" id="1_o10pm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cbbuditkrn656" path="res://characters/player.tscn" id="8_tkm5h"]
 [ext_resource type="PackedScene" path="res://misc/flag.tscn" id="9_flag"]
 [ext_resource type="PackedScene" path="res://items/coin.tscn" id="10_coin"]
+[ext_resource type="PackedScene" path="res://enemies/koopa.tscn" id="11_koopa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qraqc"]
 size = Vector2(3584, 240)
@@ -263,6 +264,9 @@ position = Vector2(2800, 176)
 
 [node name="Coin15" parent="." instance=ExtResource("10_coin")]
 position = Vector2(2816, 176)
+
+[node name="Koopa" parent="." instance=ExtResource("11_koopa")]
+position = Vector2(2544, 192)
 
 [node name="Flag" parent="." instance=ExtResource("9_flag")]
 position = Vector2(3176, 200)

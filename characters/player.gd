@@ -396,7 +396,13 @@ func _on_hitbox_area_entered(area: Area2D):
 				velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
 				_award_stomp_points()
 		elif not has_cooldown:
-			take_hit()
+			# Walking into a resting shell kicks it away instead of hurting
+			# Mario; anything else still costs him.
+			if body.has_method("can_be_kicked") and body.can_be_kicked():
+				body.kick(signf(body.global_position.x - global_position.x))
+				StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
+			else:
+				take_hit()
 
 func _shoot_fireball():
 	if get_tree().get_nodes_in_group("fireballs").size() >= MAX_FIREBALLS:

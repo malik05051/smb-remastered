@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://enemies/koopa.gd" id="1_koopa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khit"]
+size = Vector2(12, 6)
+
+[node name="Koopa" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 0
+script = ExtResource("1_koopa")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Shell" type="Polygon2D" parent="Visual"]
+color = Color(0.164706, 0.65098, 0.223529, 1)
+polygon = PackedVector2Array(-7, -2, -5, -8, 5, -8, 7, -2, 5, 2, -5, 2)
+
+[node name="ShellRim" type="Polygon2D" parent="Visual"]
+color = Color(0.968627, 0.827451, 0.396078, 1)
+polygon = PackedVector2Array(-7, 0, 7, 0, 5, 3, -5, 3)
+
+[node name="Walking" type="Node2D" parent="Visual"]
+
+[node name="Head" type="Polygon2D" parent="Visual/Walking"]
+color = Color(0.968627, 0.827451, 0.396078, 1)
+polygon = PackedVector2Array(-11, -16, -4, -16, -4, -9, -11, -9)
+
+[node name="Eye" type="Polygon2D" parent="Visual/Walking"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-9, -14, -7, -14, -7, -12, -9, -12)
+
+[node name="Neck" type="Polygon2D" parent="Visual/Walking"]
+color = Color(0.968627, 0.827451, 0.396078, 1)
+polygon = PackedVector2Array(-9, -10, -5, -10, -5, -6, -9, -6)
+
+[node name="Feet" type="Polygon2D" parent="Visual/Walking"]
+color = Color(0.968627, 0.827451, 0.396078, 1)
+polygon = PackedVector2Array(-6, 3, -2, 3, -2, 6, -6, 6)
+
+[node name="Feet2" type="Polygon2D" parent="Visual/Walking"]
+color = Color(0.968627, 0.827451, 0.396078, 1)
+polygon = PackedVector2Array(2, 3, 6, 3, 6, 6, 2, 6)
+
+[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-7, -8, 7, -8, 7, 6, -7, 6)
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_khit")
+
+[node name="VisibilityEnabler" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(0.8, 0.8)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
