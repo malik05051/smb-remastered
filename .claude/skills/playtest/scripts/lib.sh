@@ -3,7 +3,7 @@
 
 set -uo pipefail
 
-GODOT_VERSION="${GODOT_VERSION:-4.3-stable}"
+GODOT_VERSION="${GODOT_VERSION:-4.7-stable}"
 TOOLS_DIR="${TOOLS_DIR:-/tmp/godot-playtest}"
 GODOT="${GODOT:-$TOOLS_DIR/Godot_v${GODOT_VERSION}_linux.x86_64}"
 OUT_DIR="${OUT_DIR:-$TOOLS_DIR/out}"

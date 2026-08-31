@@ -16,12 +16,12 @@ missed real breakage — see *Lessons* at the bottom.
 bash .claude/skills/playtest/scripts/setup.sh
 ```
 
-Installs `xvfb`, `imagemagick`, `xdotool`, `unzip`, downloads Godot 4.3, and
+Installs `xvfb`, `imagemagick`, `xdotool`, `unzip`, downloads Godot 4.7, and
 imports the project. Idempotent, so re-run it freely; only the first run pays
-the ~50 MB download.
+the ~100 MB download.
 
-The project targets Godot 4.7 but 4.3 opens and runs it fine. That version gap
-matters when writing files back — see *The .import trap*.
+4.7 is the version `project.godot` targets, which keeps the working tree clean
+— see *Use the version the project targets* for why that matters.
 
 ## Looking at the game
 
@@ -99,31 +99,45 @@ Things that will otherwise waste your time:
 - **New `class_name` scripts need a rescan.** A harness referencing a freshly
   created class fails to parse until you re-run `--import` (or `setup.sh`).
 
-## The .import trap
+## Use the version the project targets
 
-Godot 4.3 rewrites `*.import` files and silently drops keys that 4.7 wrote
-(`compress/uastc_level` and friends). Committing that quietly downgrades the
-project. After any run, before staging:
+`setup.sh` pins Godot **4.7**, matching `config/features` in `project.godot`.
+Keep it that way. An older build opens the project but rewrites every
+`*.import` file on import, silently dropping keys the newer editor wrote
+(`compress/uastc_level` and friends) — committing that quietly downgrades the
+project for everyone else. On a matching version there is no such churn, so
+after a playtest `git status` stays clean.
+
+If you ever do run an older build, restore what it touched before staging:
 
 ```bash
 for f in $(git diff --name-only -- '*.import'); do git restore --worktree -- "$f"; done
 ```
 
-Keep genuinely new `.import` files for assets you added — only restore the ones
-you did not mean to touch. Never `git add -A` straight after a playtest without
-checking `git status` for `.import` churn.
+## Adding assets and scripts
 
-Adding a new sprite? Write it as **8-bit RGBA**. ImageMagick helpfully optimises
-down to 4-bit when an image has few colours, and Godot 4.7 will not display the
-result — a bug that looks exactly like "the sprite disappeared":
+Let Godot generate its own sidecar files rather than hand-writing them. Add the
+`.png` or `.gd`, run `setup.sh` (or any script, which imports first), then
+commit whatever Godot produced alongside it:
+
+- new textures get a `.png.import`
+- new scripts get a `.gd.uid` — the repo tracks these, and a script added
+  outside the editor simply has none until an import pass creates it
+
+Hand-writing an `.import` by hand is possible (the hashed path is just
+`md5("res://path/to/file.png")`) but fragile: it is easy to omit the `uid` line
+and end up with a resource the editor resolves inconsistently. Running the
+import is cheaper and correct.
+
+For sprites, match the repo's existing convention of 8-bit RGBA — ImageMagick
+optimises the bit depth down when an image has few colours, and while a
+low-depth PNG does load in 4.7 (tested), staying consistent with every other
+sprite avoids a variable when something looks wrong:
 
 ```bash
 convert in.png -depth 8 -define png:color-type=6 PNG32:assets/sprites/out.png
-identify -format "%z\n" assets/sprites/out.png   # must print 8
+identify -format "%z\n" assets/sprites/out.png   # prints 8
 ```
-
-The `.import` sidecar can be hand-written in 4.7 format: copy an existing one
-and replace the hashed path, which is just `md5("res://assets/sprites/<name>")`.
 
 ## Gotchas of the container
 
