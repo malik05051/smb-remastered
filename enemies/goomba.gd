@@ -17,15 +17,18 @@ const _THEMES = {
 
 
 func _ready():
+	LevelBounds.despawn_when_outside(self, LevelBounds.of(self))
 	_set_theme(StageManager.theme)
 	StageManager.connect("theme_changed", _set_theme)
 
 
 func _physics_process(delta):
-	var collision = get_last_slide_collision()
-
-	if collision:
-		var normal = collision.get_normal()
+	# get_last_slide_collision() only reports the *last* contact of the previous
+	# move, which on the ground is usually the floor -- so walking into a wall
+	# often went unnoticed and the Goomba pushed against it forever. is_on_wall()
+	# looks at every contact instead.
+	if is_on_wall():
+		var normal = get_wall_normal()
 		if normal.x:
 			is_facing_left = normal.x < 0
 
@@ -54,7 +57,10 @@ func _set_theme(theme: StageManager.StageTheme):
 func _on_hitbox_area_entered(area: Area2D):
 	var body = area.get_parent()
 
-	if body is Player and body.has_cooldown:
+	# Only other enemies turn a Goomba around. Bumping into Mario used to flip
+	# it too, which made a Goomba stood next to him jitter on the spot instead
+	# of walking -- and on the NES it just walks straight into him.
+	if body is Player:
 		return
 
 	is_facing_left = not is_facing_left

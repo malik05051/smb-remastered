@@ -27,11 +27,15 @@ var koopa_state: KoopaState = KoopaState.WALKING
 var _revive_timer := 0.0
 
 
-func _physics_process(delta):
-	var collision = get_last_slide_collision()
+func _ready():
+	LevelBounds.despawn_when_outside(self, LevelBounds.of(self))
 
-	if collision:
-		var normal = collision.get_normal()
+
+func _physics_process(delta):
+	# See goomba.gd: the last slide collision is normally the floor, so walls
+	# went unnoticed and the Koopa (or a sliding shell) stalled against them.
+	if is_on_wall():
+		var normal = get_wall_normal()
 		if normal.x:
 			is_facing_left = normal.x < 0
 
@@ -89,10 +93,8 @@ func _wake_up():
 func _on_hitbox_area_entered(area: Area2D):
 	var body = area.get_parent()
 
+	# Mario never turns an enemy around on the NES; only other enemies do.
 	if body is Player:
-		if body.has_cooldown:
-			return
-		is_facing_left = not is_facing_left
 		return
 
 	if not body.is_in_group("enemies"):
