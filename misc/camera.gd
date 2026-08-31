@@ -21,6 +21,14 @@ func set_bounds(bounds: CollisionShape2D):
 
 
 func _update_zoom():
+	# size_changed is connected in _ready(), but the bounds only arrive once the
+	# player enters a Zone a few frames later. Resizing the window before that
+	# divides by a zero-sized bounds and yields an infinite zoom, which blanks
+	# the entire world while the HUD keeps drawing (it is a CanvasLayer) -- so
+	# the game looks like it disappeared. Wait until the bounds are real.
+	if _bounds_size.x <= 0.0 or _bounds_size.y <= 0.0:
+		return
+
 	var viewport_rect = get_viewport_rect()
 	var zoom_factor = max(
 		viewport_rect.size.x / _bounds_size.x, viewport_rect.size.y / _bounds_size.y
