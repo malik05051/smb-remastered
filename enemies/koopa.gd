@@ -26,11 +26,9 @@ var koopa_state: KoopaState = KoopaState.WALKING
 
 var _revive_timer := 0.0
 
-var _bounds: Rect2 = Rect2()
-
 
 func _ready():
-	_bounds = LevelBounds.of(self)
+	LevelBounds.despawn_when_outside(self, LevelBounds.of(self))
 
 
 func _physics_process(delta):
@@ -58,10 +56,6 @@ func _physics_process(delta):
 	visual.scale.x = 1.0 if is_facing_left else -1.0
 
 	move_and_slide()
-
-	# Walked off the left edge or fell into a pit -- remove it, as the NES does.
-	if _bounds.has_area() and not _bounds.has_point(global_position):
-		queue_free()
 
 
 # Called by the player when jumped on.
