@@ -10,6 +10,8 @@ const DESPAWN_TIME_SEC: float = 1.0
 
 var is_alive: bool = true
 
+var _bounds: Rect2 = Rect2()
+
 const _THEMES = {
 	StageManager.StageTheme.OVERWORLD: preload("res://enemies/goomba_frames_overworld.tres"),
 	StageManager.StageTheme.UNDERGROUND: preload("res://enemies/goomba_frames_underground.tres"),
@@ -17,15 +19,18 @@ const _THEMES = {
 
 
 func _ready():
+	_bounds = LevelBounds.of(self)
 	_set_theme(StageManager.theme)
 	StageManager.connect("theme_changed", _set_theme)
 
 
 func _physics_process(delta):
-	var collision = get_last_slide_collision()
-
-	if collision:
-		var normal = collision.get_normal()
+	# get_last_slide_collision() only reports the *last* contact of the previous
+	# move, which on the ground is usually the floor -- so walking into a wall
+	# often went unnoticed and the Goomba pushed against it forever. is_on_wall()
+	# looks at every contact instead.
+	if is_on_wall():
+		var normal = get_wall_normal()
 		if normal.x:
 			is_facing_left = normal.x < 0
 
@@ -37,6 +42,12 @@ func _physics_process(delta):
 	velocity.y = min(Physics.MAX_FALL_SPEED, velocity.y + Physics.GRAVITY * delta)
 
 	move_and_slide()
+
+	# Gone off the left edge or down a pit: the NES deletes such an enemy, and
+	# without this it keeps walking (visibly, since the camera cannot follow it
+	# past its limit) or falls indefinitely.
+	if _bounds.has_area() and not _bounds.has_point(global_position):
+		queue_free()
 
 
 func stomp():
@@ -54,7 +65,10 @@ func _set_theme(theme: StageManager.StageTheme):
 func _on_hitbox_area_entered(area: Area2D):
 	var body = area.get_parent()
 
-	if body is Player and body.has_cooldown:
+	# Only other enemies turn a Goomba around. Bumping into Mario used to flip
+	# it too, which made a Goomba stood next to him jitter on the spot instead
+	# of walking -- and on the NES it just walks straight into him.
+	if body is Player:
 		return
 
 	is_facing_left = not is_facing_left

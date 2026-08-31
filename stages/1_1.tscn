@@ -173,7 +173,7 @@ position = Vector2(2728, 152)
 item = 1
 
 [node name="Goomba" parent="." instance=ExtResource("4_38siv")]
-position = Vector2(470, 200)
+position = Vector2(540, 200)
 
 [node name="Goomba2" parent="." instance=ExtResource("4_38siv")]
 position = Vector2(648, 200)
@@ -272,7 +272,7 @@ position = Vector2(680, 192)
 position = Vector2(1450, 192)
 
 [node name="Koopa" parent="." instance=ExtResource("11_koopa")]
-position = Vector2(2544, 192)
+position = Vector2(2680, 192)
 
 [node name="Flag" parent="." instance=ExtResource("9_flag")]
 position = Vector2(3176, 200)
