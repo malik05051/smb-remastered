@@ -53,9 +53,9 @@ func _on_hitbox_area_entered(area: Area2D):
 	if "is_alive" in body and not body.is_alive:
 		return
 
-	# Sur NES une boule de feu ne l'aplatit pas : elle le retourne et l'envoie
-	# valser hors de l'ecran. stomp() reste le repli pour un ennemi qui ne
-	# saurait pas etre projete.
+	# On the NES a fireball does not flatten the enemy: it flips it over and
+	# sends it off the screen. stomp() stays the fallback for anything that
+	# cannot be flung.
 	if body.has_method("fling"):
 		body.fling(direction)
 	elif body.has_method("stomp"):

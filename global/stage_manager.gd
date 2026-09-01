@@ -43,17 +43,20 @@ var theme: StageTheme = StageTheme.OVERWORLD:
 func lose_life():
 	lives -= 1
 
-	# Le score repart de zero a chaque vie perdue, pas seulement au game over.
-	score = 0
-	score_changed.emit()
-
 	if lives <= 0:
 		game_over.emit()
 		# Nothing used to act on game_over, so running out of lives left the
 		# game sitting there with a dead Mario and no way to carry on.
+		# _restart_game() clears the score itself, hence no reset here.
 		_restart_game()
-	else:
-		get_tree().reload_current_scene()
+		return
+
+	# Losing a life clears the score, not just running out of them. This is a
+	# deliberate departure from the NES, which keeps it until a full restart.
+	score = 0
+	score_changed.emit()
+
+	get_tree().reload_current_scene()
 
 
 func _restart_game():

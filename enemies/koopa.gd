@@ -13,8 +13,8 @@ const SHELL_SPEED = 160.0
 # How long a kicked-free shell sits before the Koopa climbs back into it.
 const REVIVE_SEC = 6.0
 
-# Touche par une boule de feu : sur NES l'ennemi se retourne et part en
-# tonneau hors de l'ecran au lieu d'etre aplati.
+# Hit by a fireball: on the NES the enemy flips over and tumbles off the
+# screen instead of being flattened.
 const FLING_UP_SPEED = -260.0
 const FLING_SIDE_SPEED = 70.0
 const FLING_LIFETIME_SEC = 3.0
@@ -40,7 +40,8 @@ func _ready():
 
 func _physics_process(delta):
 	if _flung:
-		# Sans collision, on integre a la main pour qu'il traverse le decor.
+		# No collision left, so integrate by hand and let it fall through the
+		# level geometry.
 		velocity.y = min(Physics.MAX_FALL_SPEED, velocity.y + Physics.GRAVITY * delta)
 		global_position += velocity * delta
 		return
@@ -77,12 +78,12 @@ func fling(direction: float):
 
 	_flung = true
 	is_alive = false
-	# Une carapace projetee ne doit plus pouvoir etre ramassee ni relancee.
+	# A flung shell must not stay kickable on its way out.
 	koopa_state = KoopaState.WALKING
 
-	# Plus rien ne doit l'arreter en chemin : l'enabler de visibilite le
-	# figerait des qu'il quitte l'ecran, et sa forme de collision l'arreterait
-	# sur le sol qu'il est justement cense traverser.
+	# Nothing may stop it on the way out: the visibility enabler would freeze
+	# it the moment it leaves the screen, and its collision shape would catch
+	# it on the very ground it is meant to fall through.
 	var enabler = get_node_or_null("VisibilityEnabler")
 	if enabler:
 		enabler.queue_free()
