@@ -394,6 +394,15 @@ func _on_hitbox_area_entered(area: Area2D):
 		if not body.is_alive:
 			return
 
+		# A shell at rest is kicked by any contact, from the side or from above,
+		# as on the NES. Landing on one used to fall through to the stomp branch
+		# below, which only reset its revive timer and bounced Mario off it --
+		# so coming down on a shell after stomping the Koopa left him bouncing
+		# on the spot, unable to ever kick it.
+		if body.has_method("can_be_kicked") and body.can_be_kicked():
+			_kick_shell(body)
+			return
+
 		var stomp = velocity.y > 0 and hitbox.global_position.y < area.global_position.y
 
 		if stomp:
@@ -402,13 +411,23 @@ func _on_hitbox_area_entered(area: Area2D):
 				velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
 				_award_stomp_points()
 		elif not has_cooldown:
-			# Walking into a resting shell kicks it away instead of hurting
-			# Mario; anything else still costs him.
-			if body.has_method("can_be_kicked") and body.can_be_kicked():
-				body.kick(signf(body.global_position.x - global_position.x))
-				StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
-			else:
-				take_hit()
+			take_hit()
+
+
+func _kick_shell(shell):
+	# Away from Mario; when he lands squarely on top there is no side to pick,
+	# so send it the way he is facing.
+	var direction = signf(shell.global_position.x - global_position.x)
+
+	if direction == 0.0:
+		direction = -1.0 if is_facing_left else 1.0
+
+	shell.kick(direction)
+	StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
+
+	# Kicking one on the way down still gives the little hop a stomp does.
+	if velocity.y > 0:
+		velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
 
 func _shoot_fireball():
 	if get_tree().get_nodes_in_group("fireballs").size() >= MAX_FIREBALLS:
