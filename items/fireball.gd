@@ -53,7 +53,12 @@ func _on_hitbox_area_entered(area: Area2D):
 	if "is_alive" in body and not body.is_alive:
 		return
 
-	if body.has_method("stomp"):
+	# On the NES a fireball does not flatten the enemy: it flips it over and
+	# sends it off the screen. stomp() stays the fallback for anything that
+	# cannot be flung.
+	if body.has_method("fling"):
+		body.fling(direction)
+	elif body.has_method("stomp"):
 		body.stomp()
 
 	StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
