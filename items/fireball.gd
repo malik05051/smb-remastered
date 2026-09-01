@@ -53,7 +53,12 @@ func _on_hitbox_area_entered(area: Area2D):
 	if "is_alive" in body and not body.is_alive:
 		return
 
-	if body.has_method("stomp"):
+	# Sur NES une boule de feu ne l'aplatit pas : elle le retourne et l'envoie
+	# valser hors de l'ecran. stomp() reste le repli pour un ennemi qui ne
+	# saurait pas etre projete.
+	if body.has_method("fling"):
+		body.fling(direction)
+	elif body.has_method("stomp"):
 		body.stomp()
 
 	StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)

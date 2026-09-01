@@ -43,6 +43,10 @@ var theme: StageTheme = StageTheme.OVERWORLD:
 func lose_life():
 	lives -= 1
 
+	# Le score repart de zero a chaque vie perdue, pas seulement au game over.
+	score = 0
+	score_changed.emit()
+
 	if lives <= 0:
 		game_over.emit()
 		# Nothing used to act on game_over, so running out of lives left the

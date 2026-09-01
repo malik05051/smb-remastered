@@ -13,6 +13,12 @@ const SHELL_SPEED = 160.0
 # How long a kicked-free shell sits before the Koopa climbs back into it.
 const REVIVE_SEC = 6.0
 
+# Touche par une boule de feu : sur NES l'ennemi se retourne et part en
+# tonneau hors de l'ecran au lieu d'etre aplati.
+const FLING_UP_SPEED = -260.0
+const FLING_SIDE_SPEED = 70.0
+const FLING_LIFETIME_SEC = 3.0
+
 @onready var visual: Node2D = $Visual
 @onready var sprite: AnimatedSprite2D = $Visual/Sprite
 
@@ -25,6 +31,7 @@ var is_alive: bool = true
 var koopa_state: KoopaState = KoopaState.WALKING
 
 var _revive_timer := 0.0
+var _flung: bool = false
 
 
 func _ready():
@@ -32,6 +39,12 @@ func _ready():
 
 
 func _physics_process(delta):
+	if _flung:
+		# Sans collision, on integre a la main pour qu'il traverse le decor.
+		velocity.y = min(Physics.MAX_FALL_SPEED, velocity.y + Physics.GRAVITY * delta)
+		global_position += velocity * delta
+		return
+
 	# See goomba.gd: the last slide collision is normally the floor, so walls
 	# went unnoticed and the Koopa (or a sliding shell) stalled against them.
 	if is_on_wall():
@@ -56,6 +69,31 @@ func _physics_process(delta):
 	visual.scale.x = 1.0 if is_facing_left else -1.0
 
 	move_and_slide()
+
+
+func fling(direction: float):
+	if _flung:
+		return
+
+	_flung = true
+	is_alive = false
+	# Une carapace projetee ne doit plus pouvoir etre ramassee ni relancee.
+	koopa_state = KoopaState.WALKING
+
+	# Plus rien ne doit l'arreter en chemin : l'enabler de visibilite le
+	# figerait des qu'il quitte l'ecran, et sa forme de collision l'arreterait
+	# sur le sol qu'il est justement cense traverser.
+	var enabler = get_node_or_null("VisibilityEnabler")
+	if enabler:
+		enabler.queue_free()
+
+	process_mode = Node.PROCESS_MODE_INHERIT
+	set_physics_process(true)
+	$CollisionShape.set_deferred("disabled", true)
+	$Hitbox.set_deferred("monitoring", false)
+	visual.scale.y = -1.0
+	velocity = Vector2(FLING_SIDE_SPEED * direction, FLING_UP_SPEED)
+	get_tree().create_timer(FLING_LIFETIME_SEC).connect("timeout", queue_free)
 
 
 # Called by the player when jumped on.
