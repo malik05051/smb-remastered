@@ -1,7 +1,9 @@
 extends CanvasLayer
 
-# The NES original gives 400 time units in most stages (1-1 included), and one
-# unit lasts 0.4s (24 frames at 60Hz NTSC) rather than a real second.
+# 400 time units, as the NES original gives in most stages (1-1 included).
+# One unit lasts a real second here. The NES runs them at 0.4s (24 frames at
+# 60Hz NTSC), which reads as the clock racing -- roughly 2.5 units gone per
+# second -- so the stage is deliberately given real seconds instead.
 const STARTING_TIME: int = 400
 
 # How fast the end-of-stage time->points tally ticks.
