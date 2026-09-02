@@ -55,7 +55,6 @@ animations = [{
 script = ExtResource("4_hud_gd")
 
 [node name="Countdown" type="Timer" parent="."]
-wait_time = 0.4
 autostart = true
 
 [node name="Control" type="Control" parent="."]
