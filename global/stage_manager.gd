@@ -2,11 +2,18 @@ extends Node
 
 signal theme_changed
 signal game_over
+signal life_lost
 signal level_completed
 signal coin_collected
 signal score_changed
 
 const STARTING_LIVES = 3
+
+# How long the GAME OVER screen stays up before the run restarts.
+const GAME_OVER_SCREEN_SEC: float = 3.0
+
+# How long the "WORLD 1-1 / MARIO x N" screen stays up between lives.
+const LIFE_LOST_SCREEN_SEC: float = 2.0
 
 # Point values from the NES original.
 const POINTS_COIN = 200
@@ -45,9 +52,11 @@ func lose_life():
 
 	if lives <= 0:
 		game_over.emit()
-		# Nothing used to act on game_over, so running out of lives left the
-		# game sitting there with a dead Mario and no way to carry on.
+		# Let the HUD hold its GAME OVER screen for a moment: _restart_game()
+		# reloads the stage, which rebuilds the HUD and would wipe the message
+		# in the same frame it appeared.
 		# _restart_game() clears the score itself, hence no reset here.
+		await get_tree().create_timer(GAME_OVER_SCREEN_SEC).timeout
 		_restart_game()
 		return
 
@@ -55,6 +64,11 @@ func lose_life():
 	# deliberate departure from the NES, which keeps it until a full restart.
 	score = 0
 	score_changed.emit()
+
+	# Same reason as the game over screen: the reload rebuilds the HUD, so the
+	# interstitial has to be given its moment before that happens.
+	life_lost.emit(lives)
+	await get_tree().create_timer(LIFE_LOST_SCREEN_SEC).timeout
 
 	get_tree().reload_current_scene()
 
