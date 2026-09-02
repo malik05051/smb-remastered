@@ -43,7 +43,16 @@ jobs:
           # around a diff instead of reasoning from the diff alone. Without
           # them every file access was refused: the last run before this change
           # reported "permission_denials_count": 2.
-          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment,Read,Grep,Glob"'
+          # Task is disallowed so the reviewer cannot delegate. Left to itself
+          # it spawns background review agents and then ends its turn to wait
+          # for them -- but a CI run has no next turn, so the action exits and
+          # kills them with their findings. Both runs after Read/Grep/Glob were
+          # added ended that way and posted nothing:
+          #   #25  spawned 7, completed 5, "I'll wait for the remaining three
+          #        background review agents to complete naturally"
+          #   #26  spawned 4, completed 2, "Both review agents ... are still
+          #        running in the background"
+          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment,Read,Grep,Glob" --disallowedTools "Task"'
           # Otherwise the run log only carries an init and a result block, and
           # the review itself is visible nowhere but the PR comments.
           show_full_output: true
