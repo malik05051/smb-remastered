@@ -164,29 +164,26 @@ position = Vector2(2087, 88)
 [node name="QuestionBlock14" parent="." unique_id=1183005736 instance=ExtResource("1_o10pm")]
 position = Vector2(2728, 152)
 
-[node name="Goomba" parent="." unique_id=1101849600 instance=ExtResource("4_38siv")]
-position = Vector2(540, 200)
-
 [node name="Goomba2" parent="." unique_id=424881961 instance=ExtResource("4_38siv")]
-position = Vector2(648, 200)
+position = Vector2(658, 200)
 
 [node name="Goomba3" parent="." unique_id=2056977703 instance=ExtResource("4_38siv")]
-position = Vector2(824, 200)
+position = Vector2(845, 204)
 
 [node name="Goomba4" parent="." unique_id=1722386722 instance=ExtResource("4_38siv")]
-position = Vector2(848, 200)
+position = Vector2(873, 200)
 
 [node name="Goomba5" parent="." unique_id=211607721 instance=ExtResource("4_38siv")]
-position = Vector2(1288, 72)
+position = Vector2(1266, 107)
 
 [node name="Goomba6" parent="." unique_id=1608250691 instance=ExtResource("4_38siv")]
-position = Vector2(1320, 72)
+position = Vector2(1309, 72)
 
 [node name="Goomba7" parent="." unique_id=1370297494 instance=ExtResource("4_38siv")]
-position = Vector2(1560, 200)
+position = Vector2(1524, 200)
 
 [node name="Goomba8" parent="." unique_id=71869236 instance=ExtResource("4_38siv")]
-position = Vector2(1584, 200)
+position = Vector2(1548, 200)
 
 [node name="Goomba9" parent="." unique_id=1900387999 instance=ExtResource("4_38siv")]
 position = Vector2(1832, 200)
@@ -195,16 +192,16 @@ position = Vector2(1832, 200)
 position = Vector2(1856, 200)
 
 [node name="Goomba11" parent="." unique_id=1803931143 instance=ExtResource("4_38siv")]
-position = Vector2(1992, 200)
+position = Vector2(1984, 200)
 
 [node name="Goomba12" parent="." unique_id=463121347 instance=ExtResource("4_38siv")]
-position = Vector2(2016, 200)
+position = Vector2(2008, 200)
 
 [node name="Goomba13" parent="." unique_id=940143334 instance=ExtResource("4_38siv")]
-position = Vector2(2056, 200)
+position = Vector2(2038, 200)
 
 [node name="Goomba14" parent="." unique_id=899073506 instance=ExtResource("4_38siv")]
-position = Vector2(2080, 200)
+position = Vector2(2062, 200)
 
 [node name="Goomba15" parent="." unique_id=1397954587 instance=ExtResource("4_38siv")]
 position = Vector2(2792, 200)
@@ -212,14 +209,8 @@ position = Vector2(2792, 200)
 [node name="Goomba16" parent="." unique_id=1148913726 instance=ExtResource("4_38siv")]
 position = Vector2(2816, 200)
 
-[node name="Koopa2" parent="." unique_id=1166912904 instance=ExtResource("11_koopa")]
-position = Vector2(680, 192)
-
 [node name="Koopa3" parent="." unique_id=1432855783 instance=ExtResource("11_koopa")]
-position = Vector2(1450, 192)
-
-[node name="Koopa" parent="." unique_id=1765567522 instance=ExtResource("11_koopa")]
-position = Vector2(2680, 192)
+position = Vector2(1700, 203)
 
 [node name="Flag" parent="." unique_id=811267355 instance=ExtResource("9_flag")]
 position = Vector2(3176, 200)
@@ -237,3 +228,6 @@ drag_left_margin = 0.0
 drag_top_margin = 0.6
 drag_right_margin = 0.0
 drag_bottom_margin = 0.6
+
+[node name="Goomba17" parent="." unique_id=1654574010 instance=ExtResource("4_38siv")]
+position = Vector2(344, 199)
