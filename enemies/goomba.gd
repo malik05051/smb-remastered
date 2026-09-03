@@ -4,11 +4,18 @@ extends CharacterBody2D
 const SPEED: float = 30.0
 const DESPAWN_TIME_SEC: float = 1.0
 
+# Hit by a fireball: on the NES the enemy flips over and tumbles off the
+# screen instead of being flattened.
+const FLING_UP_SPEED = -260.0
+const FLING_SIDE_SPEED = 70.0
+const FLING_LIFETIME_SEC = 3.0
+
 @onready var sprite: AnimatedSprite2D = $Sprite
 
 @export var is_facing_left: bool = true
 
 var is_alive: bool = true
+var _flung: bool = false
 
 const _THEMES = {
 	StageManager.StageTheme.OVERWORLD: preload("res://enemies/goomba_frames_overworld.tres"),
@@ -23,6 +30,13 @@ func _ready():
 
 
 func _physics_process(delta):
+	if _flung:
+		# No collision left, so integrate by hand and let it fall through the
+		# level geometry.
+		velocity.y = min(Physics.MAX_FALL_SPEED, velocity.y + Physics.GRAVITY * delta)
+		global_position += velocity * delta
+		return
+
 	# get_last_slide_collision() only reports the *last* contact of the previous
 	# move, which on the ground is usually the floor -- so walking into a wall
 	# often went unnoticed and the Goomba pushed against it forever. is_on_wall()
@@ -40,6 +54,29 @@ func _physics_process(delta):
 	velocity.y = min(Physics.MAX_FALL_SPEED, velocity.y + Physics.GRAVITY * delta)
 
 	move_and_slide()
+
+
+func fling(direction: float):
+	if _flung:
+		return
+
+	_flung = true
+	is_alive = false
+
+	# Nothing may stop it on the way out: the visibility enabler would freeze
+	# it the moment it leaves the screen, and its collision shape would catch
+	# it on the very ground it is meant to fall through.
+	var enabler = get_node_or_null("VisibilityEnabler")
+	if enabler:
+		enabler.queue_free()
+
+	process_mode = Node.PROCESS_MODE_INHERIT
+	set_physics_process(true)
+	$CollisionShape.set_deferred("disabled", true)
+	$Hitbox.set_deferred("monitoring", false)
+	sprite.flip_v = true
+	velocity = Vector2(FLING_SIDE_SPEED * direction, FLING_UP_SPEED)
+	get_tree().create_timer(FLING_LIFETIME_SEC).connect("timeout", queue_free)
 
 
 func stomp():

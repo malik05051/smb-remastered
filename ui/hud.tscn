@@ -55,8 +55,16 @@ animations = [{
 script = ExtResource("4_hud_gd")
 
 [node name="Countdown" type="Timer" parent="."]
-wait_time = 0.4
 autostart = true
+
+[node name="Blackout" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

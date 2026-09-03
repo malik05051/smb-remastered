@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://enemies/koopa.gd" id="1_koopa"]
 [ext_resource type="Texture2D" path="res://assets/sprites/koopa.png" id="2_koopa"]
@@ -8,18 +8,11 @@
 atlas = ExtResource("2_koopa")
 region = Rect2(0, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kw2"]
-atlas = ExtResource("2_koopa")
-region = Rect2(16, 0, 16, 24)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_koopa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kw1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kw2")
 }],
 "loop": true,
 "name": &"walk",
