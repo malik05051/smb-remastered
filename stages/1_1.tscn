@@ -134,7 +134,8 @@ position = Vector2(360, 88)
 
 [node name="QuestionBlock5" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1032, 136)
-item = 4
+item = 3
+invisible = true
 
 [node name="QuestionBlock6" parent="." instance=ExtResource("1_o10pm")]
 position = Vector2(1256, 152)
