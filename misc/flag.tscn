@@ -10,15 +10,15 @@ script = ExtResource("1_flag")
 
 [node name="Pole" type="Polygon2D" parent="."]
 color = Color(0.784314, 0.752941, 0.180392, 1)
-polygon = PackedVector2Array(-1, 0, 1, 0, 1, -128, -1, -128)
+polygon = PackedVector2Array(-1, -8, 1, -8, 1, -136, -1, -136)
 
 [node name="Ball" type="Polygon2D" parent="."]
-position = Vector2(0, -128)
+position = Vector2(0, -136)
 color = Color(0.164706, 0.65098, 0.223529, 1)
 polygon = PackedVector2Array(4, 0, 2.83, 2.83, 0, 4, -2.83, 2.83, -4, 0, -2.83, -2.83, 0, -4, 2.83, -2.83)
 
 [node name="Cloth" type="Node2D" parent="."]
-position = Vector2(0, -120)
+position = Vector2(0, -128)
 
 [node name="Pennant" type="Polygon2D" parent="Cloth"]
 color = Color(1, 1, 1, 1)
