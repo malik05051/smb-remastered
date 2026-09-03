@@ -36,6 +36,14 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
+          # The action's own trigger detection defaults to "@claude" and only
+          # matches that literal phrase, not substrings of it. The repo's bot
+          # is @claude317 (see bot_name below), so without this, a comment
+          # like "@claude317 fix this" passes the workflow's `if:` (a loose
+          # contains() check) but the action then finds "No trigger was met
+          # for @claude" and exits having done nothing -- see issue #28.
+          trigger_phrase: '@claude317'
+
           # Attribute Claude's commits to a real, dedicated GitHub account
           # (rather than the default bot identity, which GitHub resolves to
           # github-actions[bot] and excludes from the Contributors graph).

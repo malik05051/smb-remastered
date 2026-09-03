@@ -19,6 +19,7 @@ const red_mushroom_scene = preload("res://items/red_mushroom.tscn")
 const fire_flower_scene = preload("res://items/fire_flower.tscn")
 
 @export var item: Item = Item.NONE
+@export var invisible: bool = false
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var hit_area: Area2D = $HitArea
@@ -33,6 +34,7 @@ var _multi_coin_hits: int = 0
 func _ready():
 	_set_theme(StageManager.theme)
 	StageManager.connect("theme_changed", _set_theme)
+	sprite.visible = not invisible
 
 
 func _physics_process(delta):
@@ -55,6 +57,8 @@ func hit(body: Node):
 
 
 func on_hit(body: Node):
+	sprite.visible = true
+
 	for hit_body in hit_area.get_overlapping_bodies():
 		if hit_body.has_method("hit"):
 			hit_body.hit(self)

@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
       issues: read
       id-token: write
 
@@ -56,6 +56,11 @@ jobs:
           # Otherwise the run log only carries an init and a result block, and
           # the review itself is visible nowhere but the PR comments.
           show_full_output: true
+          # Without this, a `prompt`-driven run posts nothing on the PR until
+          # the review is fully done, so a slow review looks identical to a
+          # stuck/silent one. This posts a single comment with a checklist
+          # that updates live as Claude works, then marks it done.
+          track_progress: true
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
