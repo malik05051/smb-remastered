@@ -9,6 +9,10 @@ const STARTING_TIME: int = 400
 # How fast the end-of-stage time->points tally ticks.
 const TIME_BONUS_TICK_SEC: float = 0.02
 
+# How long the "COURSE CLEAR!" screen stays up, after the time->points tally
+# finishes, before the game restarts.
+const COURSE_CLEAR_RESTART_DELAY_SEC: float = 2.0
+
 @onready var _timer_label: Label = $Control/HBoxContainer/Timer
 @onready var _countdown: Timer = $Countdown
 @onready var _message_label: Label = $Control/Message
@@ -43,7 +47,9 @@ func _on_countdown_timeout():
 func _on_level_completed():
 	_countdown.stop()
 	_show_message("COURSE CLEAR!")
-	_convert_time_to_score()
+	await _convert_time_to_score()
+	await get_tree().create_timer(COURSE_CLEAR_RESTART_DELAY_SEC).timeout
+	StageManager.restart_game()
 
 
 # Out of lives. Black out the stage and say so: without this the run simply

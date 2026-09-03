@@ -52,12 +52,12 @@ func lose_life():
 
 	if lives <= 0:
 		game_over.emit()
-		# Let the HUD hold its GAME OVER screen for a moment: _restart_game()
+		# Let the HUD hold its GAME OVER screen for a moment: restart_game()
 		# reloads the stage, which rebuilds the HUD and would wipe the message
 		# in the same frame it appeared.
-		# _restart_game() clears the score itself, hence no reset here.
+		# restart_game() clears the score itself, hence no reset here.
 		await get_tree().create_timer(GAME_OVER_SCREEN_SEC).timeout
-		_restart_game()
+		restart_game()
 		return
 
 	# Losing a life clears the score, not just running out of them. This is a
@@ -73,7 +73,7 @@ func lose_life():
 	get_tree().reload_current_scene()
 
 
-func _restart_game():
+func restart_game():
 	lives = STARTING_LIVES
 	coins = 0
 	score = 0
