@@ -17,6 +17,7 @@ const CLOTH_REST_Y = -18.0
 const HEIGHT_POINTS = [100, 400, 800, 2000, 5000]
 
 @onready var cloth: Node2D = $Cloth
+@onready var clear_sound: AudioStreamPlayer = $ClearSound
 
 var _touched := false
 
@@ -27,6 +28,7 @@ func _on_trigger_body_entered(body: Node):
 
 	_touched = true
 
+	clear_sound.play()
 	StageManager.add_score(_points_for_height(body.global_position.y))
 
 	var cloth_tween = get_tree().create_tween()
