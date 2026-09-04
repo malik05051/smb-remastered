@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bvhoe84euxtt4"
+path="res://.godot/imported/Ma maman a dit que j'étais gros.mp3-8c1c53997b6a08576df3e6573235ab07.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Ma maman a dit que j'étais gros.mp3"
+dest_files=["res://.godot/imported/Ma maman a dit que j'étais gros.mp3-8c1c53997b6a08576df3e6573235ab07.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
