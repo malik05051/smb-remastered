@@ -297,7 +297,7 @@ func process_animation():
 		sprite.play("jump")
 	elif is_skiding:
 		sprite.play("skid")
-	elif velocity.x:
+	elif absf(velocity.x) >= MIN_SPEED:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
