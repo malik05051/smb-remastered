@@ -9,7 +9,7 @@ size = Vector2(8, 128)
 script = ExtResource("1_flag")
 
 [node name="Pole" type="Polygon2D" parent="."]
-color = Color(0.784314, 0.752941, 0.180392, 1)
+color = Color(0.721569, 0.964706, 0.121569, 1)
 polygon = PackedVector2Array(-1, -8, 1, -8, 1, -136, -1, -136)
 
 [node name="Ball" type="Polygon2D" parent="."]
