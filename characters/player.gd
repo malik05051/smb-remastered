@@ -111,6 +111,7 @@ var collected_item_ref: Node = null
 @onready var big_collision_shape: CollisionPolygon2D = $BigCollisionShape
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var pitfall_sound: AudioStreamPlayer = $PitfallSound
 
 func _ready():
 	_update_tree()
@@ -133,6 +134,7 @@ func _physics_process(delta):
 		_stomp_combo = 0
 
 	if _has_landed and camera and global_position.y > camera.limit_bottom:
+		pitfall_sound.play()
 		die()
 		return
 
