@@ -251,15 +251,19 @@ func process_bounds_collision():
 
 	const HALF_TILE = 8
 
-	var _old_position = global_position
+	var min_x = camera.limit_left + HALF_TILE
+	var max_x = camera.limit_right - HALF_TILE
 
-	global_position.x = clamp(
-		global_position.x,
-		camera.limit_left + HALF_TILE,
-		camera.limit_right - HALF_TILE
-	)
+	global_position.x = clamp(global_position.x, min_x, max_x)
 
-	if global_position.x != _old_position.x:
+	# Once pinned at an edge, process_walk() keeps re-accelerating into it every
+	# frame from the held input -- zeroing velocity only on the frame the clamp
+	# above actually moves something misses that, since the position stops
+	# changing once already flush with the edge. That let the walk animation
+	# flicker back on indefinitely instead of settling into idle.
+	if global_position.x <= min_x and velocity.x < 0.0:
+		velocity.x = 0.0
+	elif global_position.x >= max_x and velocity.x > 0.0:
 		velocity.x = 0.0
 
 func handle_last_collision():
