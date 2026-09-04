@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://misc/flag.gd" id="1_flag"]
+[ext_resource type="Texture2D" path="res://assets/sprites/flag_pole.png" id="2_pole"]
+[ext_resource type="Texture2D" path="res://assets/sprites/flag_cloth.png" id="3_cloth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flagtrig"]
 size = Vector2(8, 128)
@@ -8,25 +10,20 @@ size = Vector2(8, 128)
 [node name="Flag" type="Node2D"]
 script = ExtResource("1_flag")
 
-[node name="Pole" type="Polygon2D" parent="."]
-color = Color(0.721569, 0.964706, 0.121569, 1)
-polygon = PackedVector2Array(-1, -8, 1, -8, 1, -136, -1, -136)
-
-[node name="Ball" type="Polygon2D" parent="."]
-position = Vector2(0, -136)
-color = Color(0.164706, 0.65098, 0.223529, 1)
-polygon = PackedVector2Array(4, 0, 2.83, 2.83, 0, 4, -2.83, 2.83, -4, 0, -2.83, -2.83, 0, -4, 2.83, -2.83)
+[node name="PoleBall" type="Sprite2D" parent="."]
+position = Vector2(-15.6, -139.75)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_pole")
+centered = false
 
 [node name="Cloth" type="Node2D" parent="."]
 position = Vector2(0, -128)
 
-[node name="Pennant" type="Polygon2D" parent="Cloth"]
-color = Color(1, 1, 1, 1)
-polygon = PackedVector2Array(-1, -2, -17, -2, -17, 10, -1, 10, -7, 4)
-
-[node name="Symbol" type="Polygon2D" parent="Cloth"]
-color = Color(0.164706, 0.65098, 0.223529, 1)
-polygon = PackedVector2Array(-9, 1, -6, 4, -9, 7, -12, 4)
+[node name="Pennant" type="Sprite2D" parent="Cloth"]
+position = Vector2(-15.6, -3.95)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_cloth")
+centered = false
 
 [node name="Trigger" type="Area2D" parent="."]
 position = Vector2(0, -64)
