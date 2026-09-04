@@ -293,7 +293,7 @@ func process_animation():
 		sprite.play("jump")
 	elif is_skiding:
 		sprite.play("skid")
-	elif input_axis.x or velocity.x:
+	elif velocity.x:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
@@ -344,6 +344,12 @@ func die():
 
 	velocity = Vector2(0.0, DEATH_HOP_SPEED)
 
+	# The death pose only exists on the small sprite's frames -- big/fire Mario
+	# shrinks back down for it, same as the original game.
+	big_sprite.visible = false
+	fire_sprite.visible = false
+	small_sprite.visible = true
+	sprite = small_sprite
 	sprite.play("death")
 
 	get_tree().create_timer(DEATH_DELAY_SEC).timeout.connect(StageManager.lose_life)
