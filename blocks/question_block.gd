@@ -26,6 +26,7 @@ const fire_flower_scene = preload("res://items/fire_flower.tscn")
 @onready var bump_sound: AudioStreamPlayer = $BumpSound
 @onready var coin_sound: AudioStreamPlayer = $CoinSound
 @onready var break_sound: AudioStreamPlayer = $BreakSound
+@onready var powerup_appear_sound: AudioStreamPlayer = $PowerUpAppearSound
 
 var _hit: bool = false
 var _is_empty: bool = false
@@ -89,11 +90,11 @@ func on_hit(body: Node):
 			else:
 				_item_instance = red_mushroom_scene.instantiate()
 			item = Item.NONE
-			bump_sound.play()
+			powerup_appear_sound.play()
 		Item.GREEN_MUSHROOM:
 			_item_instance = red_mushroom_scene.instantiate()  # TODO: green (1-up) mushroom
 			item = Item.NONE
-			bump_sound.play()
+			powerup_appear_sound.play()
 		_:
 			_item_instance = null
 			bump_sound.play()

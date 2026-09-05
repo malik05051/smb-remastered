@@ -118,6 +118,8 @@ var collected_item_ref: Node = null
 @onready var stomp_sound: AudioStreamPlayer = $StompSound
 @onready var kick_sound: AudioStreamPlayer = $KickSound
 @onready var powerup_sound: AudioStreamPlayer = $PowerUpSound
+@onready var fireball_sound: AudioStreamPlayer = $FireballSound
+@onready var death_sound: AudioStreamPlayer = $DeathSound
 
 func _ready():
 	_update_tree()
@@ -376,6 +378,7 @@ func die():
 
 	is_dead = true
 	hitbox.set_deferred("monitoring", false)
+	death_sound.play()
 
 	velocity = Vector2(0.0, DEATH_HOP_SPEED)
 
@@ -481,6 +484,7 @@ func _shoot_fireball():
 	var fireball = fireball_scene.instantiate()
 	add_sibling(fireball)
 	fireball.launch(global_position + Vector2(-8.0 if is_facing_left else 8.0, -4.0), is_facing_left)
+	fireball_sound.play()
 
 
 func _award_stomp_points():
