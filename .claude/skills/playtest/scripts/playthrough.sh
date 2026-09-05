@@ -13,7 +13,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 FRAMES="${FRAMES:-6}"
 
 start_display
-start_game
+start_game "res://main.tscn"
 sleep 11
 
 if ! game_is_running; then

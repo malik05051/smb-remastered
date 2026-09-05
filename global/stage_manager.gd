@@ -92,11 +92,6 @@ func lose_life():
 		restart_game()
 		return
 
-	# Losing a life clears the score, not just running out of them. This is a
-	# deliberate departure from the NES, which keeps it until a full restart.
-	score = 0
-	score_changed.emit()
-
 	# Same reason as the game over screen: the reload rebuilds the HUD, so the
 	# interstitial has to be given its moment before that happens.
 	life_lost.emit(lives)
