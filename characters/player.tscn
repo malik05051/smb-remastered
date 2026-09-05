@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dk2kaoiuhbxjt" path="res://assets/sprites/mario_shrink.png" id="5_oyv1a"]
 [ext_resource type="AudioStream" path="res://assets/sounds/Ma maman a dit que j'étais gros.mp3" id="6_pitfall_sound"]
 [ext_resource type="AudioStream" uid="uid://5mevq07h1qio" path="res://assets/sounds/Ethan rage.mp3" id="7_damage_sound"]
+[ext_resource type="AudioStream" uid="uid://doci6lg8uldpn" path="res://assets/sounds/Jump (Small).wav" id="8_jump_small"]
+[ext_resource type="AudioStream" uid="uid://bdem75xh0jkrf" path="res://assets/sounds/Jump (Super).wav" id="9_jump_super"]
+[ext_resource type="AudioStream" uid="uid://d274s7kqka70r" path="res://assets/sounds/Stomp.wav" id="10_stomp"]
+[ext_resource type="AudioStream" uid="uid://cyf8podr7l1gt" path="res://assets/sounds/Kick.wav" id="11_kick"]
+[ext_resource type="AudioStream" uid="uid://s20ppk3qhlx" path="res://assets/sounds/Power Up.wav" id="12_powerup"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r34y0"]
 atlas = ExtResource("2_gatvr")
@@ -414,6 +419,21 @@ stream = ExtResource("6_pitfall_sound")
 
 [node name="DamageSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_damage_sound")
+
+[node name="JumpSmallSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_jump_small")
+
+[node name="JumpSuperSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jump_super")
+
+[node name="StompSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_stomp")
+
+[node name="KickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_kick")
+
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_powerup")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

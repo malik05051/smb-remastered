@@ -23,6 +23,9 @@ const fire_flower_scene = preload("res://items/fire_flower.tscn")
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var hit_area: Area2D = $HitArea
+@onready var bump_sound: AudioStreamPlayer = $BumpSound
+@onready var coin_sound: AudioStreamPlayer = $CoinSound
+@onready var break_sound: AudioStreamPlayer = $BreakSound
 
 var _hit: bool = false
 var _is_empty: bool = false
@@ -70,10 +73,12 @@ func on_hit(body: Node):
 		Item.SINGLE_COIN:
 			_item_instance = coin_particle_scene.instantiate()
 			StageManager.collect_coin()
+			coin_sound.play()
 			item = Item.NONE
 		Item.MULTI_COIN:
 			_item_instance = coin_particle_scene.instantiate()
 			StageManager.collect_coin()
+			coin_sound.play()
 
 			_multi_coin_hits += 1
 			if _multi_coin_hits >= MULTI_COIN_HITS:
@@ -84,11 +89,14 @@ func on_hit(body: Node):
 			else:
 				_item_instance = red_mushroom_scene.instantiate()
 			item = Item.NONE
+			bump_sound.play()
 		Item.GREEN_MUSHROOM:
 			_item_instance = red_mushroom_scene.instantiate()  # TODO: green (1-up) mushroom
 			item = Item.NONE
+			bump_sound.play()
 		_:
 			_item_instance = null
+			bump_sound.play()
 
 	if _item_instance and item == Item.NONE:
 		_is_empty = true

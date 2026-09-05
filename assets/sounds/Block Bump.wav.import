@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3y7nbi0fw5ia"
+path="res://.godot/imported/Block Bump.wav-d59f98fe1eacd69f567454bf6670eb79.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Block Bump.wav"
+dest_files=["res://.godot/imported/Block Bump.wav-d59f98fe1eacd69f567454bf6670eb79.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
