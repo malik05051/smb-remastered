@@ -146,6 +146,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	handle_last_collision()
+	stop_walk_into_wall()
 
 func process_input():
 	input_axis.x = Input.get_axis("move_left", "move_right")
@@ -284,6 +285,23 @@ func handle_last_collision():
 		
 		if collider.has_method("hit"):
 			collider.hit(self)
+
+func stop_walk_into_wall():
+	# Pressed against a solid (a pipe, a wall tile...) and still holding into it,
+	# process_walk() re-accelerates from scratch next frame regardless -- how far
+	# that gets before move_and_slide() clips it again depends on the collision
+	# geometry, so the leftover residual varies with it. It once happened to land
+	# exactly on MIN_SPEED, which retriggered "walk" every other frame forever.
+	# Zeroing it here, the same way process_bounds_collision() already does at
+	# the level edges, stops the re-acceleration at the source instead of
+	# chasing whatever residual value the geometry produces next.
+	if not is_on_wall():
+		return
+
+	var wall_normal = get_wall_normal()
+
+	if wall_normal.x != 0.0 and sign(velocity.x) == sign(-wall_normal.x):
+		velocity.x = 0.0
 
 func process_animation():
 	sprite.flip_h = is_facing_left
