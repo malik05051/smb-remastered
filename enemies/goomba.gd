@@ -11,6 +11,7 @@ const FLING_SIDE_SPEED = 70.0
 const FLING_LIFETIME_SEC = 3.0
 
 @onready var sprite: AnimatedSprite2D = $Sprite
+@onready var fling_sound: AudioStreamPlayer = $FlingSound
 
 @export var is_facing_left: bool = true
 
@@ -62,6 +63,7 @@ func fling(direction: float):
 
 	_flung = true
 	is_alive = false
+	fling_sound.play()
 
 	# Nothing may stop it on the way out: the visibility enabler would freeze
 	# it the moment it leaves the screen, and its collision shape would catch
