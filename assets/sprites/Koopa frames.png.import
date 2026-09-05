@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by338wqsv4igw"
-path="res://.godot/imported/koopa.png-43402754976e523197aa8df07b08d36a.ctex"
+uid="uid://bwc7emojr3do6"
+path="res://.godot/imported/Koopa frames.png-f45b9f9e95c1feaf4480620275c8c7fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/koopa.png"
-dest_files=["res://.godot/imported/koopa.png-43402754976e523197aa8df07b08d36a.ctex"]
+source_file="res://assets/sprites/Koopa frames.png"
+dest_files=["res://.godot/imported/Koopa frames.png-f45b9f9e95c1feaf4480620275c8c7fd.ctex"]
 
 [params]
 
