@@ -2,6 +2,9 @@
 
 [ext_resource type="SpriteFrames" uid="uid://d1emq3qdnue2i" path="res://blocks/question_block_frames_overworld.tres" id="2_72mot"]
 [ext_resource type="Script" path="res://blocks/question_block.gd" id="2_jpxdx"]
+[ext_resource type="AudioStream" uid="uid://c3y7nbi0fw5ia" path="res://assets/sounds/Block Bump.wav" id="3_bump"]
+[ext_resource type="AudioStream" uid="uid://dme32av537s4o" path="res://assets/sounds/Coin.wav" id="4_coin"]
+[ext_resource type="AudioStream" uid="uid://b2fqrfbpn1lna" path="res://assets/sounds/Block Break.wav" id="5_break"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bs6b"]
 size = Vector2(16, 16)
@@ -30,5 +33,14 @@ collision_mask = 6
 [node name="Shape" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_m3o3j")
+
+[node name="BumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bump")
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_coin")
+
+[node name="BreakSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_break")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

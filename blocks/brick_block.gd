@@ -20,6 +20,12 @@ func on_hit(body: Node):
 		if body is Player and body.state == Player.State.SMALL:
 			return
 
+		# super() already fired the bump sound for the (in this case wrong)
+		# assumption that the block survives the hit -- swap it for the break
+		# sound before it's audible.
+		bump_sound.stop()
+		break_sound.play()
+
 		_spawn_debris()
 		queue_free()
 

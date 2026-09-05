@@ -113,6 +113,11 @@ var collected_item_ref: Node = null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var pitfall_sound: AudioStreamPlayer = $PitfallSound
 @onready var damage_sound: AudioStreamPlayer = $DamageSound
+@onready var jump_small_sound: AudioStreamPlayer = $JumpSmallSound
+@onready var jump_super_sound: AudioStreamPlayer = $JumpSuperSound
+@onready var stomp_sound: AudioStreamPlayer = $StompSound
+@onready var kick_sound: AudioStreamPlayer = $KickSound
+@onready var powerup_sound: AudioStreamPlayer = $PowerUpSound
 
 func _ready():
 	_update_tree()
@@ -184,6 +189,11 @@ func process_jump(delta: float):
 					break
 			
 			velocity.y = JUMP_SPEED[speed_threshold]
+
+			if state == State.SMALL:
+				jump_small_sound.play()
+			else:
+				jump_super_sound.play()
 	else:
 		var gravity = GRAVITY[speed_threshold]
 		
@@ -441,6 +451,7 @@ func _on_hitbox_area_entered(area: Area2D):
 		if stomp:
 			if body.has_method("stomp"):
 				body.stomp()
+				stomp_sound.play()
 				velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
 				_award_stomp_points()
 		elif not has_cooldown:
@@ -456,6 +467,7 @@ func _kick_shell(shell):
 		direction = -1.0 if is_facing_left else 1.0
 
 	shell.kick(direction)
+	kick_sound.play()
 	StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
 
 	# Kicking one on the way down still gives the little hop a stomp does.
@@ -484,6 +496,7 @@ func _on_hitbox_body_entered(body: Node):
 	if body.is_in_group("powerups"):
 		collected_item_ref = body
 		StageManager.add_score(StageManager.POINTS_POWERUP)
+		powerup_sound.play()
 
 		if body is RedMushroom:
 			transform(State.BIG)
