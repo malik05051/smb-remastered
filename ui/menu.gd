@@ -11,4 +11,5 @@ func _ready():
 
 
 func _start_game():
+	StageManager.start_theme_music()
 	get_tree().change_scene_to_file(MAIN_SCENE)

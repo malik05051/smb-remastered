@@ -58,6 +58,9 @@ var theme: StageTheme = StageTheme.OVERWORLD:
 
 func _ready():
 	add_child(_music_player)
+
+
+func start_theme_music():
 	_play_theme_music()
 
 
