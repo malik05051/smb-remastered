@@ -1,10 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="FontFile" uid="uid://bkukv2ir5407k" path="res://assets/fonts/smb.ttf" id="1_font"]
 [ext_resource type="Script" path="res://ui/menu.gd" id="2_menu_gd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_banner"]
-bg_color = Color(0.784314, 0.294118, 0.101961, 1)
+[ext_resource type="Texture2D" path="res://assets/tilesets/Super Mario Bros Logo.svg" id="3_logo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
 
@@ -17,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_menu_gd")
 
-[node name="Banner" type="Panel" parent="."]
+[node name="Logo" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,32 +23,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -76.0
+offset_top = -110.0
 offset_right = 100.0
-offset_bottom = -16.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_banner")
-
-[node name="Title" type="Label" parent="Banner"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.788235, 0.741176, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("1_font")
-theme_override_font_sizes/font_size = 16
-text = "SUPER
-MARIO BROS."
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 1
