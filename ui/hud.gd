@@ -21,6 +21,7 @@ const COURSE_CLEAR_RESTART_DELAY_SEC: float = 2.0
 @onready var _blackout: ColorRect = $Blackout
 @onready var _world_label: Label = $Control/HBoxContainer/World
 @onready var _life_lost_sound: AudioStreamPlayer = $LifeLostSound
+@onready var _game_over_sound: AudioStreamPlayer = $GameOverSound
 
 var time_left: int = STARTING_TIME
 
@@ -59,6 +60,7 @@ func _on_level_completed():
 func _on_game_over():
 	_countdown.stop()
 	_blackout.visible = true
+	_game_over_sound.play()
 	_show_message("GAME OVER")
 
 
