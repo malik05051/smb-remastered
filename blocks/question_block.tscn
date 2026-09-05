@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://c3y7nbi0fw5ia" path="res://assets/sounds/Block Bump.wav" id="3_bump"]
 [ext_resource type="AudioStream" uid="uid://dme32av537s4o" path="res://assets/sounds/Coin.wav" id="4_coin"]
 [ext_resource type="AudioStream" uid="uid://b2fqrfbpn1lna" path="res://assets/sounds/Block Break.wav" id="5_break"]
+[ext_resource type="AudioStream" uid="uid://dqh368arb878i" path="res://assets/sounds/Power Up Appears.wav" id="6_powerup_appears"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bs6b"]
 size = Vector2(16, 16)
@@ -42,5 +43,8 @@ stream = ExtResource("4_coin")
 
 [node name="BreakSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_break")
+
+[node name="PowerUpAppearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_powerup_appears")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://d274s7kqka70r" path="res://assets/sounds/Stomp.wav" id="10_stomp"]
 [ext_resource type="AudioStream" uid="uid://cyf8podr7l1gt" path="res://assets/sounds/Kick.wav" id="11_kick"]
 [ext_resource type="AudioStream" uid="uid://s20ppk3qhlx" path="res://assets/sounds/Power Up.wav" id="12_powerup"]
+[ext_resource type="AudioStream" uid="uid://6wxljgtwobtx" path="res://assets/sounds/Fireball.wav" id="13_fireball"]
+[ext_resource type="AudioStream" uid="uid://c5nb0hm74vtig" path="res://assets/sounds/Death.wav" id="14_death"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r34y0"]
 atlas = ExtResource("2_gatvr")
@@ -434,6 +436,12 @@ stream = ExtResource("11_kick")
 
 [node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_powerup")
+
+[node name="FireballSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_fireball")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_death")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
