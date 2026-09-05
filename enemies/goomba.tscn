@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/goomba.gd" id="1_kindd"]
 [ext_resource type="SpriteFrames" uid="uid://briwoepw726as" path="res://enemies/goomba_frames_overworld.tres" id="2_mtght"]
+[ext_resource type="AudioStream" uid="uid://cyf8podr7l1gt" path="res://assets/sounds/Kick.wav" id="3_fling_sound"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j6xw"]
 size = Vector2(10, 6)
@@ -34,5 +35,8 @@ polygon = PackedVector2Array(-5, -12, -7, -10, -7, -2, -5, 0, 5, 0, 7, -2, 7, -1
 
 [node name="VisibilityEnabler" type="VisibleOnScreenEnabler2D" parent="."]
 scale = Vector2(0.8, 0.8)
+
+[node name="FlingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fling_sound")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

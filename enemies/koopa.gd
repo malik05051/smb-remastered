@@ -21,6 +21,7 @@ const FLING_LIFETIME_SEC = 3.0
 
 @onready var visual: Node2D = $Visual
 @onready var sprite: AnimatedSprite2D = $Visual/Sprite
+@onready var fling_sound: AudioStreamPlayer = $FlingSound
 
 @export var is_facing_left: bool = true
 
@@ -78,6 +79,7 @@ func fling(direction: float):
 
 	_flung = true
 	is_alive = false
+	fling_sound.play()
 	# A flung shell must not stay kickable on its way out.
 	koopa_state = KoopaState.WALKING
 

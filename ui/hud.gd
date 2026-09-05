@@ -20,6 +20,7 @@ const COURSE_CLEAR_RESTART_DELAY_SEC: float = 2.0
 @onready var _score_label: Label = $Control/HBoxContainer/Score
 @onready var _blackout: ColorRect = $Blackout
 @onready var _world_label: Label = $Control/HBoxContainer/World
+@onready var _life_lost_sound: AudioStreamPlayer = $LifeLostSound
 
 var time_left: int = STARTING_TIME
 
@@ -67,6 +68,7 @@ func _on_game_over():
 func _on_life_lost(lives_left: int):
 	_countdown.stop()
 	_blackout.visible = true
+	_life_lost_sound.play()
 	_show_message("WORLD %s\n\nMARIO \u00d7  %d" % [_world(), lives_left])
 
 

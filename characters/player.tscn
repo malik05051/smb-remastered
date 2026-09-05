@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/mario_fire.png" id="9_fire"]
 [ext_resource type="Texture2D" uid="uid://culctsxgkirf" path="res://assets/sprites/mario_grow.png" id="4_f3wyq"]
 [ext_resource type="Texture2D" uid="uid://dk2kaoiuhbxjt" path="res://assets/sprites/mario_shrink.png" id="5_oyv1a"]
-[ext_resource type="AudioStream" path="res://assets/sounds/Ma maman a dit que j'étais gros.mp3" id="6_pitfall_sound"]
 [ext_resource type="AudioStream" uid="uid://5mevq07h1qio" path="res://assets/sounds/Ethan rage.mp3" id="7_damage_sound"]
 [ext_resource type="AudioStream" uid="uid://doci6lg8uldpn" path="res://assets/sounds/Jump (Small).wav" id="8_jump_small"]
 [ext_resource type="AudioStream" uid="uid://bdem75xh0jkrf" path="res://assets/sounds/Jump (Super).wav" id="9_jump_super"]
@@ -415,9 +414,6 @@ root_node = NodePath("../SmallSprite")
 libraries = {
 "": SubResource("AnimationLibrary_hjf8o")
 }
-
-[node name="PitfallSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_pitfall_sound")
 
 [node name="DamageSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_damage_sound")
