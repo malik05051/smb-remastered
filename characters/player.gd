@@ -112,6 +112,7 @@ var collected_item_ref: Node = null
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var pitfall_sound: AudioStreamPlayer = $PitfallSound
+@onready var damage_sound: AudioStreamPlayer = $DamageSound
 
 func _ready():
 	_update_tree()
@@ -351,6 +352,8 @@ func transform(to_state: State):
 	
 
 func take_hit():
+	damage_sound.play()
+
 	if state == State.SMALL:
 		die()
 	else:
