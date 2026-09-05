@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://culctsxgkirf" path="res://assets/sprites/mario_grow.png" id="4_f3wyq"]
 [ext_resource type="Texture2D" uid="uid://dk2kaoiuhbxjt" path="res://assets/sprites/mario_shrink.png" id="5_oyv1a"]
 [ext_resource type="AudioStream" path="res://assets/sounds/Ma maman a dit que j'étais gros.mp3" id="6_pitfall_sound"]
+[ext_resource type="AudioStream" uid="uid://5mevq07h1qio" path="res://assets/sounds/Ethan rage.mp3" id="7_damage_sound"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r34y0"]
 atlas = ExtResource("2_gatvr")
@@ -410,6 +411,9 @@ libraries = {
 
 [node name="PitfallSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_pitfall_sound")
+
+[node name="DamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_damage_sound")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
