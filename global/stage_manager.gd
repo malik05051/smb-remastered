@@ -70,12 +70,17 @@ func _play_theme_music():
 		_music_player.play()
 
 
+func stop_music():
+	_music_player.stop()
+
+
 func lose_life():
 	lives -= 1
 
-	# NES cuts the theme the instant Mario dies, well before the reload --
-	# the interstitial and the GAME OVER screen both play out in silence.
-	_music_player.stop()
+	# Mostly a no-op by the time this runs: die() already cut the music the
+	# instant Mario died. Still needed for the timer-runs-out case, which
+	# calls lose_life() directly without ever going through die().
+	stop_music()
 
 	if lives <= 0:
 		game_over.emit()
@@ -112,7 +117,7 @@ func restart_game():
 
 
 func level_complete():
-	_music_player.stop()
+	stop_music()
 	level_completed.emit()
 
 

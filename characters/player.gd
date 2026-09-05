@@ -362,11 +362,10 @@ func transform(to_state: State):
 	
 
 func take_hit():
-	damage_sound.play()
-
 	if state == State.SMALL:
 		die()
 	else:
+		damage_sound.play()
 		transform(state - 1)
 		_cooldown()
 
@@ -377,6 +376,7 @@ func die():
 	is_dead = true
 	hitbox.set_deferred("monitoring", false)
 	death_sound.play()
+	StageManager.stop_music()
 
 	velocity = Vector2(0.0, DEATH_HOP_SPEED)
 
