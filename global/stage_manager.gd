@@ -38,17 +38,44 @@ const _THEMES = {
 	StageTheme.UNDERGROUND: preload("res://themes/underground.tres"),
 }
 
+# No underground track yet -- _play_theme_music() just stays silent for a
+# theme with no entry here, so this is safe to leave partial.
+const _THEME_MUSIC = {
+	StageTheme.OVERWORLD: preload("res://assets/sounds/Super Mario Bros Overworld Theme.mp3"),
+}
+
 var theme: StageTheme = StageTheme.OVERWORLD:
 	set(value):
 		theme = value
 		var data = _THEMES[value] as ThemeData
 		_get_tile_map().tile_set.get_source(0).texture = data.tile_set_texture
 		RenderingServer.set_default_clear_color(data.background_color)
+		_play_theme_music()
 		theme_changed.emit(value)
+
+@onready var _music_player: AudioStreamPlayer = AudioStreamPlayer.new()
+
+
+func _ready():
+	add_child(_music_player)
+	_play_theme_music()
+
+
+func _play_theme_music():
+	var stream = _THEME_MUSIC.get(theme)
+
+	_music_player.stream = stream
+
+	if stream:
+		_music_player.play()
 
 
 func lose_life():
 	lives -= 1
+
+	# NES cuts the theme the instant Mario dies, well before the reload --
+	# the interstitial and the GAME OVER screen both play out in silence.
+	_music_player.stop()
 
 	if lives <= 0:
 		game_over.emit()
@@ -71,6 +98,7 @@ func lose_life():
 	await get_tree().create_timer(LIFE_LOST_SCREEN_SEC).timeout
 
 	get_tree().reload_current_scene()
+	_play_theme_music()
 
 
 func restart_game():
@@ -80,9 +108,11 @@ func restart_game():
 	score_changed.emit()
 	coin_collected.emit()
 	get_tree().reload_current_scene()
+	_play_theme_music()
 
 
 func level_complete():
+	_music_player.stop()
 	level_completed.emit()
 
 
