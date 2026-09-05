@@ -12,10 +12,7 @@ const STARTING_LIVES = 3
 # How long the GAME OVER screen stays up before the run restarts.
 const GAME_OVER_SCREEN_SEC: float = 3.0
 
-# How long the "WORLD 1-1 / MARIO x N" screen stays up between lives. Longer
-# than the screen strictly needs so the life-lost jingle (~2.76s) has time to
-# finish -- the reload that follows tears down the HUD and its sound player
-# with it, so a shorter wait cut the jingle off mid-playback.
+# Prolonger la durée de l'affichage des vies restantes pour que le son joue jusqu'à la fin.
 const LIFE_LOST_SCREEN_SEC: float = 3.0
 
 # Point values from the NES original.
