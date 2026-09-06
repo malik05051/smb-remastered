@@ -61,3 +61,29 @@ text = "START"
 
 [node name="FlickerTimer" type="Timer" parent="PlayButton" unique_id=961363049]
 wait_time = 0.3
+
+[node name="Credits" type="Label" parent="." unique_id=1892034512]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -90.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 8
+text = "Credits :
+malik05051
+skarline (original author)
+mrjaunepikmin
+claude"
+horizontal_alignment = 2
+vertical_alignment = 2
