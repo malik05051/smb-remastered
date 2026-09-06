@@ -147,6 +147,8 @@ func _on_hitbox_area_entered(area: Area2D):
 	# a fireball -- see fireball.gd, which prefers fling() the same way so a
 	# Koopa dies flipped into its shell rather than merely being knocked into one.
 	if koopa_state == KoopaState.SLIDING:
+		if "is_alive" in body and not body.is_alive:
+			return
 		if body.has_method("fling"):
 			body.fling(-1.0 if is_facing_left else 1.0)
 		elif body.has_method("stomp"):
