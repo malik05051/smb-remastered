@@ -12,10 +12,8 @@ script = ExtResource("1_flower")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(0, -8)
 texture = ExtResource("2_flower")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_flower")
