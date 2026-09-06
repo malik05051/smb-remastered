@@ -18,6 +18,7 @@ const HEIGHT_POINTS = [100, 400, 800, 2000, 5000]
 
 @onready var cloth: Node2D = $Cloth
 @onready var clear_sound: AudioStreamPlayer = $ClearSound
+@onready var slide_sound: AudioStreamPlayer = $SlideSound
 
 var _touched := false
 
@@ -28,7 +29,12 @@ func _on_trigger_body_entered(body: Node):
 
 	_touched = true
 
+	# The level music cuts the instant the flag is grabbed, same as the NES
+	# original, rather than lingering through the slide and walk-off.
+	StageManager.stop_music()
+
 	clear_sound.play()
+	slide_sound.play()
 	StageManager.add_score(_points_for_height(body.global_position.y))
 
 	var cloth_tween = get_tree().create_tween()

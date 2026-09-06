@@ -33,4 +33,6 @@ collision_mask = 2
 [node name="Shape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_fhit")
 
+[node name="VisibilityEnabler" type="VisibleOnScreenEnabler2D" parent="."]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
