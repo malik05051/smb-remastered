@@ -1,0 +1,38 @@
+name: Protège les fichiers audio
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  no-deleted-sounds:
+    name: Aucune suppression dans assets/sounds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Vérifie qu'aucun fichier de assets/sounds n'a été supprimé
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            echo "Pas de commit de base à comparer, on ignore."
+            exit 0
+          fi
+
+          DELETED=$(git diff --diff-filter=D --name-only "$BASE" "${{ github.sha }}" -- 'assets/sounds/**')
+
+          if [ -n "$DELETED" ]; then
+            echo "::error::Suppression interdite dans assets/sounds :"
+            echo "$DELETED"
+            exit 1
+          fi
