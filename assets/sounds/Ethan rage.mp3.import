@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5mevq07h1qio"
+path="res://.godot/imported/Ethan rage.mp3-3e6f4ac68b41e4cf89ad2c09cf20bc1e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Ethan rage.mp3"
+dest_files=["res://.godot/imported/Ethan rage.mp3-3e6f4ac68b41e4cf89ad2c09cf20bc1e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
