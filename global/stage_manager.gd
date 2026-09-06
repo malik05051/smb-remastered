@@ -6,6 +6,7 @@ signal life_lost
 signal level_completed
 signal coin_collected
 signal score_changed
+signal player_died
 
 const STARTING_LIVES = 3
 

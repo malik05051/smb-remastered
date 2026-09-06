@@ -32,9 +32,6 @@ const SPEED_THRESHOLDS = [60, 138.75]
 const STOMP_SPEED = 240.0
 const STOMP_SPEED_CAP = -60.0
 
-# The original allows at most two of Mario's fireballs on screen at a time.
-const MAX_FIREBALLS = 2
-
 const fireball_scene = preload("res://items/fireball.tscn")
 
 const COOLDOWN_TIME_SEC = 3.0
@@ -377,6 +374,7 @@ func die():
 	hitbox.set_deferred("monitoring", false)
 	death_sound.play()
 	StageManager.stop_music()
+	StageManager.player_died.emit()
 
 	velocity = Vector2(0.0, DEATH_HOP_SPEED)
 
@@ -476,9 +474,6 @@ func _kick_shell(shell):
 		velocity.y = fmod(velocity.y, STOMP_SPEED_CAP) - STOMP_SPEED
 
 func _shoot_fireball():
-	if get_tree().get_nodes_in_group("fireballs").size() >= MAX_FIREBALLS:
-		return
-
 	var fireball = fireball_scene.instantiate()
 	add_sibling(fireball)
 	fireball.launch(global_position + Vector2(-8.0 if is_facing_left else 8.0, -4.0), is_facing_left)

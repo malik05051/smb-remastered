@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://bkukv2ir5407k" path="res://assets/fonts/smb.ttf" id="1_font"]
 [ext_resource type="Script" uid="uid://b6cebodkuchu4" path="res://ui/menu.gd" id="2_menu_gd"]
 [ext_resource type="Texture2D" uid="uid://cfvcgh3sjuhgu" path="res://assets/tilesets/Super Mario Bros Logo.svg" id="3_logo"]
+[ext_resource type="AudioStream" uid="uid://bjyiunqidvkl1" path="res://assets/sounds/Title (SMB) loop.ogg" id="4_title_music"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
 
@@ -61,6 +62,9 @@ text = "START"
 
 [node name="FlickerTimer" type="Timer" parent="PlayButton" unique_id=961363049]
 wait_time = 0.3
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_title_music")
 
 [node name="Credits" type="Label" parent="." unique_id=1892034512]
 layout_mode = 1
