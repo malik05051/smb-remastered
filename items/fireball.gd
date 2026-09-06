@@ -23,8 +23,18 @@ func launch(from_position: Vector2, facing_left: bool):
 	direction = -1.0 if facing_left else 1.0
 
 
+@onready var _visibility_enabler: VisibleOnScreenEnabler2D = $VisibilityEnabler
+
+
 func _ready():
 	get_tree().create_timer(LIFETIME_SEC).timeout.connect(_burst)
+
+	# Unlike enemies (see LevelBounds), a fireball has no reason to keep
+	# living once it leaves the camera view: on the NES it simply vanishes
+	# there. Without this it stayed alive up to the full LIFETIME_SEC on open
+	# ground, which kept counting against MAX_FIREBALLS and made it feel like
+	# Mario couldn't throw again for a long stretch while walking.
+	_visibility_enabler.screen_exited.connect(_burst)
 
 
 func _physics_process(delta):
