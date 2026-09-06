@@ -18,6 +18,8 @@ jobs:
 
       - name: Vérifie qu'aucun fichier de assets/sounds n'a été supprimé
         run: |
+          set -euo pipefail
+
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE="${{ github.event.pull_request.base.sha }}"
           else
@@ -29,7 +31,10 @@ jobs:
             exit 0
           fi
 
-          DELETED=$(git diff --diff-filter=D --name-only "$BASE" "${{ github.sha }}" -- 'assets/sounds/**')
+          # -M détecte les renommages, pour qu'un simple déplacement ou une
+          # correction de nom de fichier dans assets/sounds ne soit pas
+          # confondu avec une suppression.
+          DELETED=$(git diff -M --diff-filter=D --name-only "$BASE" "${{ github.sha }}" -- 'assets/sounds/**')
 
           if [ -n "$DELETED" ]; then
             echo "::error::Suppression interdite dans assets/sounds :"
