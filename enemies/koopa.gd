@@ -82,6 +82,8 @@ func fling(direction: float):
 	fling_sound.play()
 	# A flung shell must not stay kickable on its way out.
 	koopa_state = KoopaState.WALKING
+	# Dies the same way regardless of state: retracted into its shell.
+	sprite.play("shell")
 
 	# Nothing may stop it on the way out: the visibility enabler would freeze
 	# it the moment it leaves the screen, and its collision shape would catch
@@ -141,11 +143,18 @@ func _on_hitbox_area_entered(area: Area2D):
 	if not body.is_in_group("enemies"):
 		return
 
-	# A sliding shell bowls other enemies over.
+	# A sliding shell bowls other enemies over and kills them outright, same as
+	# a fireball -- see fireball.gd, which prefers fling() the same way so a
+	# Koopa dies flipped into its shell rather than merely being knocked into one.
 	if koopa_state == KoopaState.SLIDING:
-		if body.has_method("stomp"):
+		if body.has_method("fling"):
+			body.fling(-1.0 if is_facing_left else 1.0)
+		elif body.has_method("stomp"):
 			body.stomp()
-			StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
+		else:
+			return
+		StageManager.add_score(StageManager.POINTS_FIREBALL_KILL)
+		fling_sound.play()
 		return
 
 	if koopa_state == KoopaState.WALKING:
