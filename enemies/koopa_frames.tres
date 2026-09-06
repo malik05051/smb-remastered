@@ -1,0 +1,34 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" uid="uid://bwc7emojr3do6" path="res://assets/sprites/Koopa frames.png" id="1_koopa"]
+[ext_resource type="Texture2D" uid="uid://b6diby1vjx74u" path="res://assets/sprites/koopa_shell.png" id="2_shell"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koopa1"]
+atlas = ExtResource("1_koopa")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koopa2"]
+atlas = ExtResource("1_koopa")
+region = Rect2(17, 0, 16, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koopa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koopa2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_shell")
+}],
+"loop": true,
+"name": &"shell",
+"speed": 1.0
+}]

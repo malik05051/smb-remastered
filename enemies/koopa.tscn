@@ -1,32 +1,8 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://enemies/koopa.gd" id="1_koopa"]
-[ext_resource type="Texture2D" path="res://assets/sprites/koopa.png" id="2_koopa"]
-[ext_resource type="Texture2D" path="res://assets/sprites/koopa_shell.png" id="3_shell"]
+[ext_resource type="SpriteFrames" path="res://enemies/koopa_frames.tres" id="2_koopa_frames"]
 [ext_resource type="AudioStream" uid="uid://cyf8podr7l1gt" path="res://assets/sounds/Kick.wav" id="4_fling_sound"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kw1"]
-atlas = ExtResource("2_koopa")
-region = Rect2(0, 0, 16, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_koopa"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kw1")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_shell")
-}],
-"loop": true,
-"name": &"shell",
-"speed": 1.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khit"]
 size = Vector2(12, 6)
@@ -38,7 +14,7 @@ script = ExtResource("1_koopa")
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
-sprite_frames = SubResource("SpriteFrames_koopa")
+sprite_frames = ExtResource("2_koopa_frames")
 animation = &"walk"
 autoplay = "walk"
 offset = Vector2(0, -6)
