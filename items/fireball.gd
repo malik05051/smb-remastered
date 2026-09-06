@@ -31,9 +31,7 @@ func _ready():
 
 	# Unlike enemies (see LevelBounds), a fireball has no reason to keep
 	# living once it leaves the camera view: on the NES it simply vanishes
-	# there. Without this it stayed alive up to the full LIFETIME_SEC on open
-	# ground, which kept counting against MAX_FIREBALLS and made it feel like
-	# Mario couldn't throw again for a long stretch while walking.
+	# there.
 	_visibility_enabler.screen_exited.connect(_burst)
 
 

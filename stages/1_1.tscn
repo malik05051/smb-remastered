@@ -230,4 +230,4 @@ drag_right_margin = 0.0
 drag_bottom_margin = 0.6
 
 [node name="Goomba17" parent="." unique_id=1654574010 instance=ExtResource("4_38siv")]
-position = Vector2(344, 199)
+position = Vector2(540, 200)

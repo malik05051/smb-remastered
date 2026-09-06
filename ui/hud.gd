@@ -34,6 +34,7 @@ func _ready():
 	StageManager.level_completed.connect(_on_level_completed)
 	StageManager.game_over.connect(_on_game_over)
 	StageManager.life_lost.connect(_on_life_lost)
+	StageManager.player_died.connect(_countdown.stop)
 	StageManager.coin_collected.connect(_update_coins_label)
 	StageManager.score_changed.connect(_update_score_label)
 
