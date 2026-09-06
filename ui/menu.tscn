@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://bkukv2ir5407k" path="res://assets/fonts/smb.ttf" id="1_font"]
 [ext_resource type="Script" uid="uid://b6cebodkuchu4" path="res://ui/menu.gd" id="2_menu_gd"]
 [ext_resource type="Texture2D" uid="uid://cfvcgh3sjuhgu" path="res://assets/tilesets/Super Mario Bros Logo.svg" id="3_logo"]
-[ext_resource type="AudioStream" uid="uid://bjyiunqidvkl1" path="res://assets/sounds/Title (SMB) loop.ogg" id="4_title_music"]
+[ext_resource type="AudioStream" uid="uid://bxvoeoaoiqk2c" path="res://assets/sounds/Title (SMB).ogg" id="4_title_music"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
 
