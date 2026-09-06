@@ -2,9 +2,12 @@ extends Control
 
 const MAIN_SCENE = "res://main.tscn"
 
+const SETTINGS_PATH = "user://settings.cfg"
+
 @onready var _play_button: Button = $PlayButton
 @onready var _flicker_timer: Timer = $PlayButton/FlickerTimer
 @onready var _music: AudioStreamPlayer = $Music
+@onready var _music_toggle: Button = $MusicToggle
 
 var _flicker_colors: Array[Color] = [
 	Color("e69c21"),
@@ -12,6 +15,8 @@ var _flicker_colors: Array[Color] = [
 	Color("522100"),
 ]
 var _flicker_index := 0
+
+var _music_enabled := true
 
 func _ready():
 	_play_button.grab_focus()
@@ -27,7 +32,13 @@ func _ready():
 
 	# The source file isn't imported as a looping stream, so loop it manually.
 	_music.finished.connect(_music.play)
-	_music.play()
+
+	_load_music_setting()
+	_music_toggle.pressed.connect(_on_toggle_music)
+	_update_music_toggle_label()
+
+	if _music_enabled:
+		_music.play()
 
 func _on_hover_start():
 	_flicker_index = 0
@@ -49,3 +60,29 @@ func _start_game():
 	_music.stop()
 	StageManager.start_theme_music()
 	get_tree().change_scene_to_file(MAIN_SCENE)
+
+func _on_toggle_music():
+	_music_enabled = not _music_enabled
+	_update_music_toggle_label()
+	_save_music_setting()
+
+	if _music_enabled:
+		_music.play()
+	else:
+		_music.stop()
+
+func _update_music_toggle_label():
+	_music_toggle.text = "MUSIC: ON" if _music_enabled else "MUSIC: OFF"
+
+func _load_music_setting():
+	var config = ConfigFile.new()
+
+	if config.load(SETTINGS_PATH) == OK:
+		_music_enabled = config.get_value("audio", "title_music_enabled", true)
+
+func _save_music_setting():
+	var config = ConfigFile.new()
+
+	config.load(SETTINGS_PATH)
+	config.set_value("audio", "title_music_enabled", _music_enabled)
+	config.save(SETTINGS_PATH)
