@@ -13,8 +13,8 @@ env:
   EXPORT_NAME: SMB
 
 jobs:
-  export-web:
-    name: Web Export
+  export-linux:
+    name: Linux Export
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:4.3
@@ -31,18 +31,11 @@ jobs:
 
       - name: Build
         run: |
-          mkdir -v -p export/web
-          godot --headless --verbose --export-release "Web"
+          mkdir -v -p export/linux
+          godot --headless --verbose --export-release "Linux" export/linux/smb-remastered.x86_64
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: web
-          path: export/web
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: export/web
-          single-commit: true
+          name: linux
+          path: export/linux
