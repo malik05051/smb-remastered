@@ -5,7 +5,7 @@
 ## Certains sons du jeu ont été remplacés par des soundboards drôles pour éviter les droits d'auteur.
 # Compatibilité :
 - Linux
-- Windows (jusqu'à Windows 7)
+- Windows (minimum Windows 7)
 - Android TV (avant 2027, en APK seulement)
 - iOS (IPA seulement, apprendre à sideload)
 - Frigo (sous Android)
